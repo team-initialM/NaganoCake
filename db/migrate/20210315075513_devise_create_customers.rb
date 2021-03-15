@@ -6,6 +6,15 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+      
+      t.string     :firstname, null: false
+      t.string     :lastname, null: false
+      t.string     :kana_firstname, null: false
+      t.string     :kana_lastname, null: false
+      t.string     :postcode, null: false
+      t.string     :address, null: false
+      t.string     :phone_number, null: false
+      t.boolean    :is_valid, default: true, null: false
 
       ## Recoverable
       t.string   :reset_password_token
@@ -36,6 +45,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
+    
     add_index :customers, :email,                unique: true
     add_index :customers, :reset_password_token, unique: true
     # add_index :customers, :confirmation_token,   unique: true
