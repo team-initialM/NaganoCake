@@ -1,10 +1,10 @@
-class CreateCarts < ActiveRecord::Migration[5.2]
+class CreateCartProducts < ActiveRecord::Migration[5.2]
   def change
-    create_table :carts do |t|
+    create_table :cart_products do |t|
       t.integer :product_id, null: false
       t.integer :customer_id, null: false
       t.integer :quantity, null: false
-      
+
       t.timestamps
     end
     add_foreign_key :carts, :products

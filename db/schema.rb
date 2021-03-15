@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_03_15_084122) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "carts", force: :cascade do |t|
+  create_table "cart_products", force: :cascade do |t|
     t.integer "product_id", null: false
     t.integer "customer_id", null: false
     t.integer "quantity", null: false

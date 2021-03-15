@@ -7,7 +7,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.integer :price, null: false
       t.boolean :is_valid, null: false, default: true
       t.string :product_image_id
-      
+
       t.timestamps
     end
     add_foreign_key :products, :genres
