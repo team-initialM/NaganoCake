@@ -8,5 +8,6 @@ class CreateShippingAddresses < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_foreign_key :shipping_addresses, :customers
   end
 end
