@@ -37,8 +37,8 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module: :admin do
-    get '/admin' => "homes#top"
+  namespace :admin do
+    get '/' => "homes#top"
     resources :customers, only: [:index, :edit, :update, :show]
     resources :orders, only: [:update, :show] do
       resources :order_products, only: :update
@@ -46,5 +46,4 @@ Rails.application.routes.draw do
     resources :products, except: :destroy
     resources :genres, only: [:index, :update, :edit, :create]
   end
-
 end
