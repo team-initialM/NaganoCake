@@ -28,7 +28,7 @@ class Public::ShippingAddressesController < ApplicationController
     @shipping_address = ShippingAddress.find(params[:id])
     if @shipping_address.update(shipping_address_params)
       redirect_to shipping_addresses_path
-      flash[:notice] = "配送先の編集画完了しました。"
+      flash[:notice] = "配送先の編集が完了しました。"
     else
       render :edit
     end
