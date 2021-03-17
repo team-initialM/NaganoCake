@@ -21,7 +21,7 @@
           </tr>
           <tr>
             <td>税込価格 <br> （税抜価格）</td>
-            <td><%= @product.price %>（<%= @product.price %>）円</td>
+            <td><%= include_tax(@product.price).to_s(:delimited) %>（<%= @product.price.to_s(:delimited) %>）円</td>
           </tr>
           <tr>
             <td>販売ステータス</td>
@@ -37,3 +37,5 @@
   </div>
   <%= link_to "編集する", edit_admin_product_path(@product), class: 'btn btn-success' %>
 </div>
+
+

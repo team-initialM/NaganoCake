@@ -6,7 +6,7 @@
     <div class="product-info">
       <h4><%= @product.name %></h4>
       <p class="mb-5"><%= @product.description %></p>
-      <p class="mb-3"><strong>¥ <%= @product.price.to_s(:delimited) %></strong><span style="font-size: 13px;">（税込）</span></p>
+      <p class="mb-3"><strong>¥ <%= include_tax(@product.price).to_s(:delimited) %></strong><span style="font-size: 13px;">（税込）</span></p>
       <%= form_with model: @cart_product, local: true do |f| %>
 
       <% end %>
