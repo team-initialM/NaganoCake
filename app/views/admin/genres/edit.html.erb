@@ -1,0 +1,13 @@
+<div class="col-12">
+  <h3 class="mb-5">ジャンル編集</h3>
+  <div class="genre-form col-10 offset-1 mb-5">
+    <%= render 'admin/shared/error_messages', resource: @genre %>
+    <%= form_with model: @genre, url: admin_genre_path, local: true do |f| %>
+      <div class="row">
+        <%= f.label :genre, "ジャンル名", class: 'mr-3' %>
+        <%= f.text_field :genre, placeholder: "ジャンル名", class: 'form-control col-4 mr-5' %>
+        <%= f.submit "変更を保存", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>
