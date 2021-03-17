@@ -1,12 +1,12 @@
 <header>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg bg-info text-light">
     <div class="container">
       <a href="/" class="navbar-brand">
-        <%= image_tag asset_path('logo.png') %>
+        <%= image_tag asset_path('logo.png'), :size =>'200x70' %>
       </a>
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto font-weight-bold">
         <% if admin_signed_in? %>
-          <li><%= link_to "商品一覧", admin_products_path, class: 'nav-link' %></li>
+          <li><%= link_to "商品一覧", admin_products_path, class: 'nav-link ' %></li>
           <li><%= link_to "会員一覧", admin_customers_path, class: 'nav-link' %></li>
           <li><%= link_to "注文履歴一覧", admin_path, class: 'nav-link' %></li>
           <li><%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link' %></li>
@@ -15,8 +15,8 @@
             <%= text_field_tag(placeholder: "Search") %>
           </div>
         <% elsif customer_signed_in? %>
-          <p>ようこそ、<%= current_customer.firstname %>さん！</p>
-          <li><%= link_to "マイページ", show_customers_path, class: 'nav-link' %></li>
+          <li class="nav-link">ようこそ、<%= current_customer.firstname %>さん！</li>
+          <li><%= link_to "マイページ", show_customers_path, class: 'nav-link ' %></li>
           <li><%= link_to "商品一覧", products_path, class: 'nav-link' %></li>
           <li><%= link_to "カート", cart_products_path, class: 'nav-link' %></li>
           <li><%= link_to "ログアウト", destroy_customer_session_path, class: 'nav-link', method: :delete %></li>
