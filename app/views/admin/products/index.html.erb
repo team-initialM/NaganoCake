@@ -1,0 +1,32 @@
+<div class="col-12">
+  <h3 class="mb-5">商品一覧</h3>
+  <div class="add-products">
+    <%= link_to "+", new_admin_product_path %>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>税抜価格</th>
+        <th>ジャンル</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td><%= product.price.to_s(:delimited) %></td>
+          <td><%= product.genre.genre %></td>
+          <% if product.is_valid == true %>
+            <td>販売中</td>
+          <% else %>
+            <td>販売停止中</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
