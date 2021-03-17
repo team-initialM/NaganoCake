@@ -6,6 +6,9 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_products = @order.order_products
+    @order_products.each do |order_product|
+      @product_total += order_product.product_price * order_product.quantity
+    end
   end
   
   def new
