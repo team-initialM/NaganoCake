@@ -8,6 +8,13 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      flash[:notice] = 'products updated successfully.'
+      redirect_to admin_product_path(@product)
+    else
+      render :edit
+    end
   end
 
   def create
@@ -25,6 +32,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find(params[:id])
   end
 
   private
