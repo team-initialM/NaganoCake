@@ -6,9 +6,7 @@ class Public::ShippingAddressesController < ApplicationController
 
   def edit
     @shipping_address = ShippingAddress.find(params[:id])
-    if @shipping_address.customer == current_customer
-      redirect_to edit_shipping_address_path
-    else
+    unless @shipping_address.customer == current_customer
       render :index
     end
   end
@@ -20,6 +18,7 @@ class Public::ShippingAddressesController < ApplicationController
       redirect_to shipping_addresses_path
       flash[:notice] = "配送先の登録が完了しました。"
     else
+      @shipping_addresses = ShippingAddress.where(customer_id: current_customer.id)
       render :index
     end
   end
