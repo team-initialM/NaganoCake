@@ -1,3 +1,4 @@
+<%= render 'customers/shared/error_messages', resource: @shipping_address %>
 <p>配送先登録/一覧</p>
 <%= form_with model: @shipping_address, url: shipping_addresses_path, local:true do |f| %>
   <label for="shipping_address_postcode">
@@ -15,8 +16,8 @@
   <%= f.submit '新規登録' %>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-bordered">
+  <thead class="thead-light">
     <tr>
       <th>郵便番号</th>
       <th>住所</th>
@@ -25,8 +26,8 @@
     </tr>
   </thead>
   <tbody>
+    <% @shipping_addresses.each do |shipping_address| %>
     <tr>
-      <% @shipping_addresses.each do |shipping_address| %>
       <td>
         <%= shipping_address.postcode %>
       </td>
@@ -37,10 +38,10 @@
         <%= shipping_address.address_name %>
       </td>
       <td>
-        <%= link_to "編集する", edit_shipping_address_path(shipping_address.id) %>
-        <%= link_to "削除する", shipping_address_path(shipping_address.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to "編集する", edit_shipping_address_path(shipping_address.id), class:"btn btn-success" %>
+        <%= link_to "削除する", shipping_address_path(shipping_address.id), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
       </td>
-      <% end %>
     </tr>
+    <% end %>
   </tbody>
 </table>
