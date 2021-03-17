@@ -1,0 +1,19 @@
+<div class="Menu container"><%= @customer.fullname %>さんの会員詳細</div>
+
+氏名　<%= @customer.firstname %><%= @customer.lastname %><br />
+カナ　<%= @customer.kana_firstname %><%= @customer.kana_lastname %><br />
+郵便番号 <%= @customer.postcode %><br />
+住所 <%= @customer.address %><br />
+電話番号 <%= @customer.phone_number %><br />
+メールアドレス <%= @customer.email %><br />
+会員ステータス
+<% if @customer.is_valid == true %>
+   有効
+<% else %>
+   退会
+<% end %>
+<div class="container">
+  <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+</div>
+
+注文履歴一覧を見る(未実装)
