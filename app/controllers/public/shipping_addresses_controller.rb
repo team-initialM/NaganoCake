@@ -3,7 +3,7 @@ class Public::ShippingAddressesController < ApplicationController
     @shipping_addresses = ShippingAddress.where(customer_id: current_customer.id)
     @shipping_address = ShippingAddress.new
   end
-  
+
   def edit
     @shipping_address = ShippingAddress.find(params[:id])
     if @shipping_address.customer == current_customer
@@ -40,7 +40,7 @@ class Public::ShippingAddressesController < ApplicationController
     redirect_to shipping_addresses_path
     flash[:notice] = "配送先の削除が完了しました。"
   end
-  
+
   private
   def shipping_address_params
     params.require(:shipping_address).permit(:postcode, :address, :address_name)

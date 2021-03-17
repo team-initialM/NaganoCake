@@ -1,0 +1,37 @@
+<div class="main col-8 offset-2 bg-primary">
+  <div class="border border-dark col-8 offset-2">
+    <p>
+      ようこそ、ながのCAKEへ！ <br>
+      このサイトは、ケーキ販売のECサイトになります。 <br>
+      会員でない方も商品の閲覧はできますが、 <br>
+      購入には会員登録が必要になります。
+    </p>
+  </div>
+</div>
+
+<div class="new-products col-10 offset-1">
+  <h2>新着商品</h2>
+  <ul class="d-flex justify-content-center">
+    <li>
+      <%= image_tag asset_path('logo.png') %>
+      <p>商品名</p>
+      <p>¥ 0,000</p>
+    </li>
+    <li>
+      <%= image_tag asset_path('logo.png') %>
+      <p>商品名</p>
+      <p>¥ 0,000</p>
+    </li>
+    <li>
+      <%= image_tag asset_path('logo.png') %>
+      <p>商品名</p>
+      <p>¥ 0,000</p>
+    </li>
+    <li>
+      <%= image_tag asset_path('logo.png') %>
+      <p>商品名</p>
+      <p>¥ 0,000</p>
+    </li>
+  </ul>
+  <%= link_to "全ての商品を見る >", products_path %>
+</div>
