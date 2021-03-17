@@ -1,7 +1,5 @@
 本当に退会する？
 <%= link_to "退会しない", show_customers_path(current_customer) %>
 <%= form_with model: current_customer, url: withdraw_customers_path, method: :patch, class: "container", local: true do |f| %>
-<%= f.hidden_field :customer_id, value: current_customer.id %>
-<%= f.hidden_field :is_valid, value: false %>
 <%= f.submit "退会する" %>
 <% end %>

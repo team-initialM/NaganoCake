@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
+
   def show
   end
 
@@ -14,8 +16,10 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-    current_customer.update(customer_params)
-    redirect_to show_customers_path
+    current_customer.update(is_valid: false)
+    reset_session
+    flash[:notice] = "Thank you. We look forward to your next visit."
+    redirect_to root_path
   end
 
   private
