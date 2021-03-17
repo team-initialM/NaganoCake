@@ -1,0 +1,12 @@
+<div class="col-12">
+  <h3 class="mb-5">商品一覧<span style="font-size: 18px;">（全<%= @products.count %>件）</span></h3>
+  <ul class="product-list d-flex flex-wrap">
+    <% @products.each do |product| %>
+      <li class="product-list-item">
+        <%= attachment_image_tag product, :product_image %>
+        <p><%= product.name %></p>
+        <p>¥<%= product.price.to_s(:delimited) %></p>
+      </li>
+    <% end %>
+  </ul>
+</div>
