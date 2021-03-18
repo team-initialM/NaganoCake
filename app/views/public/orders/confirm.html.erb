@@ -1,1 +1,61 @@
-注文確認
+注文情報確認
+<table class="table">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_products.each do |cart_product| %>
+    <tr>
+      <td><%= cart_product.product.name %></td>
+      <td><%= cart_product.product.price.to_s(:delimited) %></td>
+      <td><%= cart_product.quantity.to_s(:delimited) %></td>
+      <td><%= cart_product.subtotal.to_s(:delimited) %></td>
+      <!--税込表示未了-->
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<table class="table">
+  <thead>
+    <tr>
+      <th>送料</th>
+      <th>商品合計</th>
+      <th>請求金額</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @order.postage.to_s(:delimited) %></td>
+      <td><%= @product_total.subtotal.to_s(:delimited) %></td>
+      <td><%= @order.total_price.to_s(:delimited) %></td>
+      <!--税込表示未了-->
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-3">支払方法</div>
+  <div class="col-7"><%= @order.payment_selection %></div>
+</div>
+<div class="row">
+  <div class="col-3">お届け先</div>
+  <div class="col-7">
+    〒<%= @order.postcode %><%= @order.address %>
+    <%= @order.address_name %>
+  </div>
+</div>
+<%= form_with model: @order, local: true do |f| %>
+  <%= f.hidden_field :customer_id, value: current_user.id %>
+  <%= f.hidden_field :total_price, value: @total_price %>
+  <!--税込未了-->
+  <%= f.hidden_field :postcode %>
+  <%= f.hidden_field :address %>
+  <%= f.hidden_field :address_name %>
+  <%= f.hidden_field :payment_selection %>
+  <%= f.hidden_field :postage %>
+  <%= f.submit "注文を確定する", class: 'btn btn-success' %>
+<% end %>

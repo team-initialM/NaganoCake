@@ -5,4 +5,13 @@ class Order < ApplicationRecord
   def subtotal
     self.product_price * self.quantity
   end
+  
+  def fullname
+    self.firstname + self.lastname
+  end
+  
+  def registred_address
+    self.postcode + self.address + self.address_name
+  end
+  
 end
