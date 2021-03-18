@@ -11,7 +11,7 @@ class Public::CartProductsController < ApplicationController
   
   def update
     @cart_product = CartProduct.find(params[:id])
-    if @cart_product.update(cart_product_params)
+    if @cart_product.update(cart_products_params)
       redirect_to cart_products_path
       flash[:notice] = "The quantity of selected items has changed."
     end
@@ -33,6 +33,6 @@ class Public::CartProductsController < ApplicationController
   
   private
     def cart_products_params
-      params.require(:cart_product).permit(:quantity)
+      params.require(:cart_product).permit(:product_id, :quantity)
     end
 end
