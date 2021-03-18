@@ -12,10 +12,9 @@
     <% @cart_products.each do |cart_product| %>
     <tr>
       <td><%= cart_product.product.name %></td>
-      <td><%= cart_product.product.price.to_s(:delimited) %></td>
+      <td><%= include_tax(cart_product.product.price).to_s(:delimited) %></td>
       <td><%= cart_product.quantity.to_s(:delimited) %></td>
       <td><%= cart_product.subtotal.to_s(:delimited) %></td>
-      <!--税込表示未了-->
     </tr>
     <% end %>
   </tbody>
@@ -31,9 +30,8 @@
   <tbody>
     <tr>
       <td><%= @order.postage.to_s(:delimited) %></td>
-      <td><%= @product_total.subtotal.to_s(:delimited) %></td>
+      <td><%= @product_total.to_s(:delimited) %></td>
       <td><%= @order.total_price.to_s(:delimited) %></td>
-      <!--税込表示未了-->
     </tr>
   </tbody>
 </table>
@@ -50,8 +48,7 @@
 </div>
 <%= form_with model: @order, local: true do |f| %>
   <%= f.hidden_field :customer_id, value: current_user.id %>
-  <%= f.hidden_field :total_price, value: @total_price %>
-  <!--税込未了-->
+  <%= f.hidden_field :total_price, value: @order.total_price %>
   <%= f.hidden_field :postcode %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :address_name %>
