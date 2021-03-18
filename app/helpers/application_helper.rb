@@ -3,4 +3,8 @@ module ApplicationHelper
     tax = 1.1
     ((price * tax).round(2)).ceil
   end
+  
+  def registred_address(address)
+    address.postcode + address.address + address.address_name
+  end
 end

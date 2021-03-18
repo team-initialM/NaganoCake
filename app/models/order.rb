@@ -10,8 +10,4 @@ class Order < ApplicationRecord
     self.firstname + self.lastname
   end
   
-  def registred_address
-    self.postcode + self.address + self.address_name
-  end
-  
 end
