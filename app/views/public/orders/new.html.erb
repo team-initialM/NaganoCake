@@ -16,7 +16,7 @@
       <p>〒<%= current_customer.postcode %><%= current_customer.address %><%= current_customer.fullname %></p>
     <%= f.radio_button :address_option, 1 %>
       <%= f.label "登録済住所から選択" %> <br>
-      <%= f.select :address, @addresses.each {|address| address.registred_address} %>
+      <%= f.select :address, @addresses.all.map {|address| registred_address(address)} %>
     <%= f.radio_button :address_option, 2 %>
       <%= f.label "新しいお届け先" %>
       <%= f.label :postcode, "郵便番号" %>

@@ -15,7 +15,7 @@
       <td><%= cart_product.product.name %></td>
       <td><%= include_tax(cart_product.product.price).to_s(:delimited) %></td>
       <td><%= cart_product.quantity.to_s(:delimited) %></td>
-      <td><%= cart_product.subtotal.to_s(:delimited) %></td>
+      <td><%= subtotal(cart_product).to_s(:delimited) %></td>
     </tr>
     <% end %>
   </tbody>
@@ -48,7 +48,7 @@
   </div>
 </div>
 <%= form_with model: @order, local: true do |f| %>
-  <%= f.hidden_field :customer_id, value: current_user.id %>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
   <%= f.hidden_field :total_price, value: @order.total_price %>
   <%= f.hidden_field :postcode %>
   <%= f.hidden_field :address %>
