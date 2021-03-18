@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   belongs_to :customer
   
   def subtotal
-    self.product_price * self.quantity
+    include_tax(self.product.price) * self.quantity
   end
   
   def fullname

@@ -7,19 +7,18 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_products = @order.order_products
     @order_products.each do |order_product|
-      @product_total += order_product.product_price * order_product.quantity
+      @ord_total += order_product.product_price * order_product.quantity
     end
   end
 
   def new
     @addresses = current_customer.shipping_addresses
-    @cart_products = Cart.where(user_id: current_user.id)
+    @cart_products = CartProduct.where(customer_id: current_customer.id)
     @order = Order.new
   end
 
   def create
     @cart = Cart.where(customer_id: current_customer.id)
-    @order = Order.new(order_params)
     if @order.save
       @cart.destroy_all
       redirect_to complete_orders_path
@@ -30,7 +29,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    @carts = Cart.where(customer_id: current_customer.id)
+    @cart_products = CartProducts.where(customer_id: current_customer.id)
     if params[:order][:address_option] == "0"
       @order.postcode = current_customer.postcode
     elsif params[:order][:address_option] == "1"
@@ -40,9 +39,10 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:address]
       @order.address_name = params[:order][:address_name]
     end
-    @order.order_products.each do |order_product|
-      @product_total += order_product.product_price * order_product.quantity
+    @cart_products.each do |cart_product|
+      @cart_total += include_tax(cart_product.product.price) * cart_product.quantity
     end
+    @order.total_price = @cart_total + @order.postage
   end
 
   def complete

@@ -1,7 +1,6 @@
 <h1>注文情報入力</h1>
-
 <%= form_with(model: @order, url: {action: 'confirm'}, local: true) do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
   <%= f.hidden_field :postage, value: "800" %>
   <div class="form-group">
     <%= f.label :payment_selection, "支払い方法" %> <br>
@@ -14,7 +13,7 @@
     <p>お届け先</p>
     <%= f.radio_button :address_option, 0, default: true %>
       <%= f.label "ご自身の住所" %>
-      <p>〒<%= current_user.postcode %><%= current_user.address %><%= current_user.fullname %></p>
+      <p>〒<%= current_customer.postcode %><%= current_customer.address %><%= current_customer.fullname %></p>
     <%= f.radio_button :address_option, 1 %>
       <%= f.label "登録済住所から選択" %> <br>
       <%= f.select :address, @addresses.each {|address| address.registred_address} %>
