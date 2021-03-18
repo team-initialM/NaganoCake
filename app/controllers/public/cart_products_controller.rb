@@ -4,7 +4,7 @@ class Public::CartProductsController < ApplicationController
   end
 
   def create
-    @cart_product = current_user.cart_products.create(cart_products_params)
+    @cart_product = current_customer.cart_products.create(cart_products_params)
     @cart_product.save
     redirect_to cart_products_path
   end
