@@ -29,7 +29,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    @cart_products = CartProducts.where(customer_id: current_customer.id)
+    @cart_products = CartProduct.where(customer_id: current_customer.id)
     if params[:order][:address_option] == "0"
       @order.postcode = current_customer.postcode
     elsif params[:order][:address_option] == "1"
@@ -40,9 +40,9 @@ class Public::OrdersController < ApplicationController
       @order.address_name = params[:order][:address_name]
     end
     @cart_products.each do |cart_product|
-      @cart_total += include_tax(cart_product.product.price) * cart_product.quantity
+      @cart_total = 1 * cart_product.quantity
     end
-    @order.total_price = @cart_total + @order.postage
+    @order.total_price =(@cart_total + @order.postage).to_i
   end
 
   def complete
