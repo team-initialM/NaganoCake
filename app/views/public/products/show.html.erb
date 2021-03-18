@@ -1,14 +1,15 @@
 <div class="col-12">
   <div class="col-8 offset-2 d-flex">
     <div class="product-img">
-      <%= attachment_image_tag @product, :product_image %>
+      <%= attachment_image_tag @product, :product_image, size: "400x300", fallback: "no_image.jpg" %>
     </div>
     <div class="product-info">
       <h4><%= @product.name %></h4>
       <p class="mb-5"><%= @product.description %></p>
       <p class="mb-3"><strong>¥ <%= include_tax(@product.price).to_s(:delimited) %></strong><span style="font-size: 13px;">（税込）</span></p>
       <%= form_with model: @cart_product, local: true do |f| %>
-
+        <%= f.select :quantity, [1,2,3,4,5,6,7,8,9,10], include_blank: "個数選択" %>
+        <%= f.submit "カートに入れる", class: 'btn btn-success ml-3' %>
       <% end %>
     </div>
   </div>
