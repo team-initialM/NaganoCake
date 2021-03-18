@@ -4,14 +4,22 @@ class Public::CartProductsController < ApplicationController
   end
 
   def create
-    @cart_product = current_customer.cart_products.create(cart_products_params)
+    @cart_product = current_customer.cart_products.build(cart_product_params)
+    @cart_products = current_customer.cart_products.all
+    @cart_products.each do |cart_product|
+      if cart_product.product_id == @cart_product.product_id
+        new_quantity = cart_product.quantity + @cart_product.quantity
+        cart_product.update_attribute(:quantity, new_quantity)
+        @cart_product.delete
+      end
+    end
     @cart_product.save
     redirect_to cart_products_path
   end
   
   def update
     @cart_product = CartProduct.find(params[:id])
-    if @cart_product.update(cart_products_params)
+    if @cart_product.update(cart_product_params)
       redirect_to cart_products_path
       flash[:notice] = "The quantity of selected items has changed."
     end
@@ -32,7 +40,7 @@ class Public::CartProductsController < ApplicationController
   end
   
   private
-    def cart_products_params
+    def cart_product_params
       params.require(:cart_product).permit(:product_id, :quantity)
     end
 end
