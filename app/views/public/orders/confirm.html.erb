@@ -8,6 +8,7 @@
       <th>小計</th>
     </tr>
   </thead>
+  
   <tbody>
     <% @cart_products.each do |cart_product| %>
     <tr>
@@ -30,7 +31,7 @@
   <tbody>
     <tr>
       <td><%= @order.postage.to_s(:delimited) %></td>
-      <td><%= @product_total.to_s(:delimited) %></td>
+      <td><%= @cart_total.to_s(:delimited) %></td>
       <td><%= @order.total_price.to_s(:delimited) %></td>
     </tr>
   </tbody>

@@ -33,7 +33,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= @product_total %></td>
+      <td><%= @order_total %></td>
       <td><%= @order.postage %></td>
       <td><%= @order.total_price %></td>
     </tr>
@@ -55,7 +55,8 @@
         <td><%= order_product.product.name %></td>
         <td><%= order_product.product_price %></td>
         <td><%= order_product.quantity %></td>
-        <td><%= order_product.subtotal %></td>
+        <td><%= order_product.product_price * order_product.quantity %></td>
+        <!--掛け算のモデル記載別途作成予定-->
       </tr>
       <% end %>
     </tbody>

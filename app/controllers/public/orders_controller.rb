@@ -7,7 +7,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_products = @order.order_products
     @order_products.each do |order_product|
-      @product_total += order_product.product_price * order_product.quantity
+      @ord_total += order_product.product_price * order_product.quantity
     end
   end
 
@@ -19,7 +19,6 @@ class Public::OrdersController < ApplicationController
 
   def create
     @cart = Cart.where(customer_id: current_customer.id)
-    # @order = Order.new(order_params)
     if @order.save
       @cart.destroy_all
       redirect_to complete_orders_path
@@ -41,9 +40,9 @@ class Public::OrdersController < ApplicationController
       @order.address_name = params[:order][:address_name]
     end
     @cart_products.each do |cart_product|
-      @product_total += include_tax(cart_product.product.price) * cart_product.quantity
+      @cart_total += include_tax(cart_product.product.price) * cart_product.quantity
     end
-    @order.total_price = @product_total + @order.postage
+    @order.total_price = @cart_total + @order.postage
   end
 
   def complete
