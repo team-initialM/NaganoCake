@@ -1,6 +1,7 @@
 <div class="col-12">
-  <h3>商品編集</h3>
+  <h3 class="my-5">商品編集</h3>
   <div class="new-product-form col-6 offset-3">
+    <%= render 'admin/shared/error_messages', resource: @product %>
     <%= form_with model: @product, url: admin_product_path, local: true do |f| %>
       <dl>
         <dt><%= f.label :product_image, "商品画像", class: 'mr-5' %></dt>

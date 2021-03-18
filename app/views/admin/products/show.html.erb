@@ -1,10 +1,10 @@
 <div class="col-12">
-  <h3 class="mb-5">商品詳細</h3>
-  <div class="product-show d-flex">
-    <div class="product-img">
-      <%= attachment_image_tag @product, :product_image %>
+  <h3 class="my-5">商品詳細</h3>
+  <div class="product-show d-flex pt-5 mb-5">
+    <div class="product-img mx-5">
+      <%= attachment_image_tag @product, :product_image, size: "400x300", fallback: "no_image.jpg" %>
     </div>
-    <div class="product-info">
+    <div class="product-info ml-5">
       <table>
         <tbody>
           <tr>
@@ -12,30 +12,30 @@
             <td><%= @product.name %></td>
           </tr>
           <tr>
-            <td>商品説明</td>
-            <td><%= @product.description %></td>
+            <td class="pt-3">商品説明</td>
+            <td class="pt-3"><%= @product.description %></td>
           </tr>
           <tr>
-            <td>ジャンル</td>
-            <td><%= @product.genre.genre %></td>
+            <td class="pt-3">ジャンル</td>
+            <td class="pt-3"><%= @product.genre.genre %></td>
           </tr>
           <tr>
-            <td>税込価格 <br> （税抜価格）</td>
-            <td><%= include_tax(@product.price).to_s(:delimited) %>（<%= @product.price.to_s(:delimited) %>）円</td>
+            <td class="pt-3">税込価格 <br> （税抜価格）</td>
+            <td class="pt-3"><%= include_tax(@product.price).to_s(:delimited) %>（<%= @product.price.to_s(:delimited) %>）円</td>
           </tr>
           <tr>
-            <td>販売ステータス</td>
+            <td class="pt-3">販売ステータス</td>
             <% if @product.is_valid == true %>
-              <td>販売中</td>
+              <td class="pt-3">販売中</td>
             <% else %>
-              <td>販売停止中</td>
+              <td class="pt-3">販売停止中</td>
             <% end %>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <%= link_to "編集する", edit_admin_product_path(@product), class: 'btn btn-success' %>
+  <%= link_to "編集する", edit_admin_product_path(@product), class: 'btn btn-success btn-lg my-5 py-3 col-2 offset-5' %>
 </div>
 
 
