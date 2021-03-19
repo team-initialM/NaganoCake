@@ -14,7 +14,6 @@ class Public::OrdersController < ApplicationController
     @addresses = current_customer.shipping_addresses
     @cart_products = CartProduct.where(customer_id: current_customer.id)
     @order = Order.new
-    # @shipping_address = ShippingAddress.new
   end
 
   def create
