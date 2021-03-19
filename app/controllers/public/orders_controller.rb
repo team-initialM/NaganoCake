@@ -7,9 +7,13 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_products = @order.order_products
-    @order_products.each do |order_product|
-      @order_total = @order_total.to_i + order_product.product_price.to_i * order_product.quantity.to_i
-    end
+    total(@order_products)
+    # @select_products_price = subtotal(@order.order_products)
+    # @total_price = @select_products_price.sum(:product_price)
+    # # @order.total_product_price(@order.order_products, @product_price_total)
+    # @order_products.each do |order_product|
+    #   @order_total = @order_total.to_i + order_product.product_price * order_product.quantity
+    # end
   end
 
   def new
