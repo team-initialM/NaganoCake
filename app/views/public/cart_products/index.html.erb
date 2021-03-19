@@ -2,11 +2,13 @@
   <p>ショッピングカート</p>
 </div>
 <% if @cart_products.present? %>
+<%= link_to "カートを空にする", destroy_all_cart_products_path, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
 <table class="table table-bordered">
   <thead class="head-light">
     <tr>
       <th>商品名</th>
       <th>単価(税込)</th>
+      <th>数量</th>
       <th>小計</th>
       <th></th>
     </tr>
@@ -15,7 +17,7 @@
     <% @cart_products.each do |cart_product| %>
     <tr>
       <td>
-        商品画像が入ります
+        <%= attachment_image_tag cart_product.product, :product_image, :fill, 60, 60 %>
         <%= cart_product.product.name %>
       </td>
       <td>
@@ -28,6 +30,8 @@
           <%= f.submit "変更", class:"btn btn-success" %>
         <% end %>
       </td>
+      <td>小計（税込単価x数量）</td>
+      <td><%= link_to "削除する", cart_product_path(cart_product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
     </tr>
     <% end %>
   </tbody>
