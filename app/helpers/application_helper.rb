@@ -8,7 +8,13 @@ module ApplicationHelper
     address.postcode + address.address + address.address_name
   end
 
-  def subtotal(order)
-    include_tax(order.product.price) * order.quantity
+  def subtotal(select_product)
+    include_tax(select_product.product.price) * select_product.quantity
+  end
+
+  def total(select_products)
+    select_products.each do |select_product|
+      @total_price = @total_price.to_i + subtotal(select_product)
+    end
   end
 end

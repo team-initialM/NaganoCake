@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
 
   protected
   def after_sign_in_path_for(resource)
@@ -11,15 +12,8 @@ class ApplicationController < ActionController::Base
        else
          reset_session
          flash[:notice] = "You have already unsubscribed."
-         #%= flash[:error]をviewに追加すればアラートが出る
          new_customer_session_path
        end
     end
   end
-
-  def include_tax(price)
-    tax = 1.1
-    ((price * tax).round(2)).ceil
-  end
-
 end

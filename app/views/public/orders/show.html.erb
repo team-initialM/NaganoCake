@@ -33,9 +33,9 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= @order_total %></td>
-      <td><%= @order.postage %></td>
-      <td><%= @order.total_price %></td>
+      <td><%= @total_price.to_s(:delimited) %></td>
+      <td><%= @order.postage.to_s(:delimited) %></td>
+      <td><%= @order.total_price.to_s(:delimited) %></td>
     </tr>
   </tbody>
 </table>
@@ -50,13 +50,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @order_products.each do |order_product| %>
+      <% @order.order_products.each do |order_product| %>
       <tr>
         <td><%= order_product.product.name %></td>
-        <td><%= order_product.product_price %></td>
-        <td><%= order_product.quantity %></td>
-        <td><%= order_product.product_price * order_product.quantity %></td>
-        <!--掛け算のモデル記載別途作成予定-->
+        <td><%= order_product.product_price.to_s(:delimited) %></td>
+        <td><%= order_product.quantity.to_s(:delimited) %></td>
+        <td><%= order_subtotal(order_product).to_s(:delimited) %></td>
       </tr>
       <% end %>
     </tbody>

@@ -9,5 +9,7 @@
 電話番号 <%= current_customer.phone_number %><br />
 メールアドレス <%= current_customer.email %><br />
 
-配送先：一覧を見る
-注文履歴：一覧を見る
+<div class="container">
+  <div class="row">配送先：<%= link_to "一覧を見る", shipping_addresses_path %></div>
+  <div class="row"><%= link_to "注文履歴一覧", orders_path %></div>
+</div>
