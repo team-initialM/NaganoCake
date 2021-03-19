@@ -8,22 +8,18 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_products = @order.order_products
     total(@order_products)
-    # @select_products_price = subtotal(@order.order_products)
-    # @total_price = @select_products_price.sum(:product_price)
-    # # @order.total_product_price(@order.order_products, @product_price_total)
-    # @order_products.each do |order_product|
-    #   @order_total = @order_total.to_i + order_product.product_price * order_product.quantity
-    # end
   end
 
   def new
     @addresses = current_customer.shipping_addresses
     @cart_products = CartProduct.where(customer_id: current_customer.id)
     @order = Order.new
+    # @shipping_address = ShippingAddress.new
   end
 
   def create
     @order = Order.new(order_params)
+    @add_shipping_address = ShippingAddress.new(customer_id: current_customer.id)
     @cart_products = CartProduct.where(customer_id: current_customer.id)
     if @order.save
       @order.move_products(@cart_products)
@@ -37,18 +33,29 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
     @cart_products = CartProduct.where(customer_id: current_customer.id)
-    if params[:order][:address_option] == "0"
-      @order.postcode = current_customer.postcode
-      @order.address = params[:order][:address]
-      @order.address_name = params[:order][:address_name]
-    elsif params[:order][:address_option] == "1"
-      @order.postcode = current_customer.postcode
-      @order.address = params[:order][:address]
-      @order.address_name = params[:order][:address_name]
-    elsif params[:order][:address_option] == "2"
+    @customer = current_customer
+    
+    if params[:address] == "customer_address"
+      @order.postcode = @customer.postcode
+      @order.address = @customer.address
+      @order.address_name = @customer.firstname + @customer.lastname
+
+    elsif params[:address] == "existing_shipping_address"
       @order.postcode = params[:order][:postcode]
       @order.address = params[:order][:address]
       @order.address_name = params[:order][:address_name]
+
+    elsif params[:address] == "add_shipping_address"
+      @add_shipping_address = ShippingAddress.new
+      @add_shipping_address.customer_id = @customer.id
+      @add_shipping_address.address = params[:shipping_address][:address]
+      @add_shipping_address.address_name = params[:shipping_address][:address_name]
+      @add_shipping_address.postcode = params[:shipping_address][:postcode]
+      @add_shipping_address.save
+
+      @order.postcode = params[:shipping_address][:postcode]
+      @order.address = params[:shipping_address][:address]
+      @order.address_name = params[:shipping_address][:address_name]
     end
     @cart_products.each do |cart_product|
       @tax_price = include_tax(cart_product.product.price)
@@ -64,4 +71,5 @@ class Public::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:customer_id, :order_status, :total_price, :postcode, :address, :address_name, :payment_selection, :postage)
   end
+
 end

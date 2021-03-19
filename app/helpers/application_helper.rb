@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def registred_address(address)
-    address.postcode + address.address + address.address_name
+    "〒" + address.postcode + "  " + address.address + "  " + address.address_name
   end
 
   def subtotal(select_product)
