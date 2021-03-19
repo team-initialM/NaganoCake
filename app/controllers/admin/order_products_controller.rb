@@ -9,13 +9,7 @@ class Admin::OrderProductsController < ApplicationController
       render admin_order_path(@order)
     end
     @order_products = OrderProduct.where(order_id: @order.id)
-    @order_products.each do |order_product|
-      if order_product.production_status == "制作完了"
-        @judge = @judge.to_i + 1
-      end
-      @count = @count.to_i + 1
-    end
-    if @judge == @count
+    if @order_products.all? { |order_product| order_product.production_status_before_type_cast == 3 }
       @order.update(order_status: "発送準備中")
     end
   end
