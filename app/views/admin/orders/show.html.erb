@@ -1,0 +1,84 @@
+<div class="col-12">
+  <h3 class="my-5">注文履歴詳細</h3>
+  <table class="mb-5">
+    <tbody>
+      <tr>
+        <th>購入者</th>
+        <td>
+          <%= link_to admin_customer_path(@order.customer) do %>
+            <%= @order.customer.firstname + @order.customer.lastname %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>注文日</th>
+        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      </tr>
+      <tr>
+        <th>配送先</th>
+        <td>〒<%= @order.postcode %> <%= @order.address %> <br> <%= @order.address_name %></td>
+      </tr>
+      <tr>
+        <th>支払い方法</th>
+        <td><%= @order.payment_selection %></td>
+      </tr>
+      <tr>
+        <th>注文ステータス</th>
+        <td>
+          <%= form_with model: @order, url:admin_order_path, method: :patch, local: true do |f| %>
+            <%= f.select :order_status, Order.order_statuses.keys %>
+            <%= f.submit "更新", class: 'btn btn-success btn-sm ml-5' %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="order-detail d-flex">
+    <table class="table col-8 mr-5">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_products.each do |order_product| %>
+          <tr>
+            <td><%= order_product.product.name %></td>
+            <td><%= include_tax(order_product.product.price).to_s(:delimited) %></td>
+            <td><%= order_product.quantity %></td>
+            <td><%= order_subtotal(order_product).to_s(:delimited) %></td>
+            <td>
+              <%= form_with model: @order_product, url: admin_order_order_product_path(@order), method: :patch, local: true do |f| %>
+                <%= f.select :production_status, OrderProduct.production_statuses.keys %>
+                <%= f.submit "更新", class: 'btn btn-success btn-sm ml-3' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="order-detail-info mt-5">
+      <table>
+        <tbody>
+          <tr>
+            <th>商品合計</th>
+            <td><%= total(@order_products) %></td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td><%= @order.total_price %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
