@@ -1,19 +1,15 @@
-<div class="Mwnu">会員情報変更画面</div>
+<div class="page_title offset-1 my-3">会員情報変更画面</div>
 
 <%= form_with model: current_customer, url: customers_path, class: "container", local: true do |f| %>
  <div class="row my-3">
-  <%= f.label "名前", class: "col-2" %>
-  (姓)<%= f.text_field :firstname, autofocus: true, class: "form-control col-4" %>
-  (名)<%= f.text_field :lastname, autofocus: true, class: "form-control col-4" %>
+  <%= f.label "氏名", class: "col-2" %>
+  <%= f.text_field :firstname, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :lastname, autofocus: true, class: "form-control col-4 offset-1" %>
 </div>
 <div class="row my-3">
   <%= f.label "フリガナ", class: "col-2" %>
-  (セイ)<%= f.text_field :kana_firstname, autofocus: true, class: "form-control col-4" %>
-  (メイ)<%= f.text_field :kana_lastname, autofocus: true, class: "form-control col-4" %>
-</div>
-<div class="row my-3">
-  <%= f.label :email, "メールアドレス",class: "col-2" %>
-  <%= f.email_field :email, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :kana_firstname, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :kana_lastname, autofocus: true, class: "form-control col-4 offset-1" %>
 </div>
 <div class="row my-3">
   <%= f.label :postcode,'郵便番号', class: "col-2" %>
@@ -21,14 +17,18 @@
 </div>
 <div class="row my-3">
   <%= f.label :address,'住所', class: "col-2" %>
-  <%= f.text_field :address, autofocus: true, class: "form-control col-8", id: "user_address" %>
+  <%= f.text_field :address, autofocus: true, class: "form-control col-9", id: "user_address" %>
 </div>
 <div class="row my-3">
   <%= f.label :phone_number,'電話番号', class: "col-2" %>
   <%= f.text_field :phone_number, autofocus: true, class: "form-control col-4" %>
 </div>
 <div class="row my-3">
-  <%= f.submit "編集内容を保存" ,class: 'btn-lg btn-sm btn-success offset-2 col-3' %>
-  <%= link_to "退会する", unsubcribe_customers_path %>
+  <%= f.label :email, "メールアドレス",class: "col-2" %>
+  <%= f.email_field :email, autofocus: true, class: "form-control col-4" %>
+</div>
+<div class="row my-4">
+  <%= f.submit "編集内容を保存" ,class: 'btn-lg btn-sm btn-success offset-2 col-4' %>
+  <%= link_to "退会する", unsubcribe_customers_path, class: "btn btn-danger offset-4" %>
 </div>
 <% end %>
