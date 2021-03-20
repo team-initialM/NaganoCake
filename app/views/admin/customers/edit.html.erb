@@ -1,15 +1,19 @@
 <div class="Menu"><%= @customer.fullname %>さんの会員情報編集</div>
 
 <%= form_with model: @customer, url: admin_customer_path, class: "container", local: true do |f| %>
- <div class="row my-3">
+<div class="row my-3">
+  <%= f.label "会員ＩＤ", class: "col-2" %>
+  <%= f.label @customer.id, class: "col-4" %>
+</div>
+<div class="row my-3">
   <%= f.label "名前", class: "col-2" %>
-  (姓)<%= f.text_field :firstname, autofocus: true, class: "form-control col-4" %>
-  (名)<%= f.text_field :lastname, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :firstname, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :lastname, autofocus: true, class: "form-control col-4 offset-1" %>
 </div>
 <div class="row my-3">
   <%= f.label "フリガナ", class: "col-2" %>
-  (セイ)<%= f.text_field :kana_firstname, autofocus: true, class: "form-control col-4" %>
-  (メイ)<%= f.text_field :kana_lastname, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :kana_firstname, autofocus: true, class: "form-control col-4" %>
+  <%= f.text_field :kana_lastname, autofocus: true, class: "form-control col-4 offset-1" %>
 </div>
 <div class="row my-3">
   <%= f.label :email, "メールアドレス",class: "col-2" %>
@@ -21,14 +25,17 @@
 </div>
 <div class="row my-3">
   <%= f.label :address,'住所', class: "col-2" %>
-  <%= f.text_field :address, autofocus: true, class: "form-control col-8", id: "user_address" %>
+  <%= f.text_field :address, autofocus: true, class: "form-control col-9", id: "user_address" %>
 </div>
 <div class="row my-3">
   <%= f.label :phone_number,'電話番号', class: "col-2" %>
   <%= f.text_field :phone_number, autofocus: true, class: "form-control col-4" %>
 </div>
-  <%= f.radio_button :is_valid, true %>有効　<%= f.radio_button :is_valid, false %>退会
 <div class="row my-3">
-  <%= f.submit "変更を保存" ,class: 'btn-lg btn-sm btn-success offset-2 col-3' %>
+  <%= f.label :is_valid,'会員ステータス', class: "col-2" %>
+  <div class="col-4"><%= f.radio_button :is_valid, true %>有効　<%= f.radio_button :is_valid, false %>退会</div>
+</div>
+<div class="row my-3">
+  <%= f.submit "変更を保存" ,class: 'btn btn-success offset-2 col-4' %>
 </div>
 <% end %>
