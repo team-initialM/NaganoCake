@@ -1,16 +1,18 @@
 <div class="col-12">
-  <h3 class="my-5">商品一覧</h3>
-  <div class="add-products">
-    <%= link_to "+", new_admin_product_path %>
+  <div class="row">
+    <h3 class="my-5 ml-5 page_title">商品一覧</h3>
+    <div class="mt-5 pt-3 offset-9">
+      <%= link_to "＋", new_admin_product_path, class: 'btn-secondary rounded-circle p-3' %>
+    </div>
   </div>
   <table class="table">
-    <thead>
+    <thead class="table-active">
       <tr>
-        <th>商品ID</th>
-        <th>商品名</th>
-        <th>税抜価格</th>
-        <th>ジャンル</th>
-        <th>ステータス</th>
+        <th style="width: 10%">商品ID</th>
+        <th style="width: 30%">商品名</th>
+        <th style="width: 10%">税抜価格</th>
+        <th style="width: 35%">ジャンル</th>
+        <th style="width: 15%">ステータス</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +26,7 @@
           </td>
           <td><%= product.price.to_s(:delimited) %></td>
           <td><%= product.genre.genre %></td>
+          <%# 販売中と販売停止中の色分けをcssに！ %>
           <% if product.is_valid == true %>
             <td>販売中</td>
           <% else %>
