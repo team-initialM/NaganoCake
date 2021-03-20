@@ -3,6 +3,9 @@ class Admin::OrderProductsController < ApplicationController
     @order = Order.find(params[:id])
     @order_product = OrderProduct.find(params[:order_product][:order_product_id])
     if @order_product.update(order_product_params)
+      if @order_product.production_status_before_type_cast == 2
+        @order.update(order_status: "製作中")
+      end
       flash[:notice] = 'production_status updated successfully.'
       redirect_to admin_order_path(@order)
     else
