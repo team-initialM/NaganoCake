@@ -1,6 +1,6 @@
 class Public::ProductsController < ApplicationController
   def index
-    @products = Product.all.order(id: "DESC")
+    @products = Product.page(params[:page]).per(8).order(id: "DESC")
   end
 
   def show
