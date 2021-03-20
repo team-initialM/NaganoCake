@@ -11,20 +11,24 @@
   </div>
   <div class="form-group">
     <p>お届け先</p>
-    <%= f.radio_button :address_option, 0, default: true %>
+      <%= radio_button_tag("address", "customer_address") %>
       <%= f.label "ご自身の住所" %>
-      <p>〒<%= current_customer.postcode %><%= current_customer.address %><%= current_customer.fullname %></p>
-    <%= f.radio_button :address_option, 1 %>
-      <%= f.label "登録済住所から選択" %> <br>
-      <%= f.select :address, @addresses.all.map {|address| registred_address(address)} %>
-    <%= f.radio_button :address_option, 2 %>
+      <p>〒<%= current_customer.postcode %>  <%= current_customer.address %>  <%= current_customer.fullname %></p>
+      <%= radio_button_tag("address", "existing_shipping_address") %>
+      <%= f.label "登録済み住所から選択" %>
+      <p><%= f.select :address, @addresses.all.map {|address| registred_address(address)} %></p>
+      <%= radio_button_tag("address", "add_shipping_address") %>
       <%= f.label "新しいお届け先" %>
-      <%= f.label :postcode, "郵便番号" %>
-      <%= f.text_field :postcode, class: 'form-control' %>
-      <%= f.label :address, "住所" %>
-      <%= f.text_field :address, class: 'form-control' %>
-      <%= f.label :address_name, "宛名" %>
-      <%= f.text_field :address_name, class: 'form-control' %>
+      <%= fields_for :shipping_address do |a| %>
+      <dl>
+        <dt><%= a.label :postcode, "郵便番号" %></dt>
+        <dd><%= a.text_field :postcode %></dd>
+        <dt><%= a.label :address, "住所" %></dt>
+        <dd><%= a.text_field :address %></dd>
+        <dt><%= a.label :address_name, "宛名" %></dt>
+        <dd><%= a.text_field :address_name %></dd>
+      <dl>
+      <% end %>
   </div>
-  <%= f.submit "確認画面へ進む" %>
+  <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
 <% end %>
