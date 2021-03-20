@@ -8,20 +8,22 @@
       <th>ステータス</th>
     </tr>
   </thead>
-  <tdoby>
-  <% @customers.each do |customer| %>
-    <tr>
-      <td><%= customer.id %></td>
-      <td><%= link_to customer.fullname, admin_customer_path(customer) %></td>
-      <td><%= customer.email %></td>
-      <td>
-        <% if customer.is_valid == true %>
-          <div>有効</div>
-        <% else %>
-          <div>退会</div>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tdoby>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= link_to customer.fullname, admin_customer_path(customer) %></td>
+        <td><%= customer.email %></td>
+        <td>
+          <% if customer.is_valid == true %>
+            <div>有効</div>
+          <% else %>
+            <div>退会</div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+
+<%= paginate @customers %>
