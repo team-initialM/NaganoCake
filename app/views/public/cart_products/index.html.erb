@@ -30,7 +30,7 @@
           <%= f.submit "変更", class:"btn btn-success" %>
         <% end %>
       </td>
-      <td>¥<%= (subtotal(cart_product)).to_s(:delimited) %></td>
+      <td><%= (subtotal(cart_product)).to_s(:delimited) %></td>
       <td><%= link_to "削除する", cart_product_path(cart_product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
     </tr>
     <% end %>
@@ -43,7 +43,7 @@
       合計金額
     </td>
     <td>
-      
+      <%= total(@cart_products) %>
     </td>
   </tbody>
 </table>
