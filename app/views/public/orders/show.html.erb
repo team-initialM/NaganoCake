@@ -15,9 +15,9 @@
         <tr>
           <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
           <td>
-            <%= @order.postcode %>
-            <%= @order.address %>
-            <%= @order.address_name %>
+            <%= @order.postcode %><br>
+            <%= @order.address %><br>
+            <%= @order.address_name %><br>
           </td>
           <td><%= @order.payment_selection %></td>
           <td><%= @order.order_status %></td>
