@@ -46,11 +46,12 @@ class Public::OrdersController < ApplicationController
       @order.address_name = @customer.firstname + @customer.lastname
 
     when "existing_shipping_address"
-      @order.postcode = params[:order][:postcode]
-      @order.address = params[:order][:address]
-      @order.address_name = params[:order][:address_name]
+      binding.pry
+      @order.postcode = @address.postcode
+      @order.address = @address.address
+      @order.address_name = @address.address_name
 
-    else
+    when "add_shipping_address"
       if params[:shipping_address][:address].present? || params[:shipping_address][:address_name].present? || params[:shipping_address][:postcode].present?
         @add_shipping_address = ShippingAddress.new
         @add_shipping_address.customer_id = @customer.id
@@ -58,6 +59,9 @@ class Public::OrdersController < ApplicationController
         @add_shipping_address.address_name = params[:shipping_address][:address_name]
         @add_shipping_address.postcode = params[:shipping_address][:postcode]
         @add_shipping_address.save
+        @order.postcode = params[:shipping_address][:postcode]
+        @order.address = params[:shipping_address][:address]
+        @order.address_name = params[:shipping_address][:address_name]
       else
         redirect_to confirm_orders_path
       end

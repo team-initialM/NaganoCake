@@ -21,7 +21,8 @@
     <%= radio_button_tag "address", "existing_shipping_address" %>
     <%= f.label "登録済み住所から選択" %>
     <div class="col">
-      <p><%= f.select :address, @addresses.all.map {|address| registred_address(address)}, {}, {class: "form-control"} %></p>
+      <!--<p>%= f.select :address, @addresses.all.map {|address| registred_address(address)}, {}, {class: "form-control"} %></p>-->
+      <%= f.collection_select :address, @addresses.all, :address, :params_registred_address, {class: "form-control"} %>
     </div>
     <%= radio_button_tag "address", "add_shipping_address" %>
     <%= f.label "新しいお届け先" %>

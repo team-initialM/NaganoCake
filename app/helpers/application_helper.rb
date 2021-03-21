@@ -18,7 +18,7 @@ module ApplicationHelper
     end
     return @total_price
   end
-  
+
   def order_total(select_products)
     select_products.each do |select_product|
       @total_price = @total_price.to_i + order_subtotal(select_product)
