@@ -1,7 +1,8 @@
-<div class="main col-8 offset-2 bg-primary">
-  <div class="border border-dark col-8 offset-2">
-    <p>
-      ようこそ、ながのCAKEへ！ <br>
+<div class="main col-8 offset-2">
+  <div class="top-image mt-5 col-12">
+    <p class="pl-3 py-5" style="font-size: 22px; color: #f5f5f5;">
+      <br>
+      ようこそ、ながのCAKEへ！ <br> <br>
       このサイトは、ケーキ販売のECサイトになります。 <br>
       会員でない方も商品の閲覧はできますが、 <br>
       購入には会員登録が必要になります。
@@ -9,8 +10,8 @@
   </div>
 </div>
 
-<div class="new-products col-10 offset-1">
-  <h2>新着商品</h2>
+<div class="new-products col-10 offset-1 my-5">
+  <h2 class="p-0">新着商品</h2>
   <ul class="d-flex justify-content-center">
     <% @products.each do |product| %>
       <li class="mr-5">
