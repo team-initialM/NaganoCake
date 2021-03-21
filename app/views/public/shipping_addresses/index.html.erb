@@ -7,9 +7,9 @@
   <%= form_with model: @shipping_address, url: shipping_addresses_path, local:true do |f| %>
     <dl>
       <dt><%= f.label :shipping_address_postcode, "郵便番号(ハイフンなし)" %></dt>
-      <dd><%= f.text_field :postcode, class: 'form-control col-4' %></dd>
+      <dd><%= f.text_field :postcode, class: 'form-control col-4', id: "customer_postcode" %></dd>
       <dt><%= f.label :shipping_address_address, "住所" %></dt>
-      <dd><%= f.text_field :address, class: 'form-control col-7'%></dd>
+      <dd><%= f.text_field :address, class: 'form-control col-7', id: "customer_address"%></dd>
       <dt><%= f.label :shipping_address_address_name, "宛名" %></dt>
       <dd class = "form-inline">
         <%= f.text_field :address_name, class: 'form-control col-4' %>
