@@ -5,9 +5,14 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @order_products = @order.order_products
-    total(@order_products)
+    unless params[:id] == "confirm"
+      @order = Order.find(params[:id])
+      @order_products = @order.order_products
+      total(@order_products)
+    else
+      redirect_to request.referer
+      flash[:notice] = "更新ボタンが押されたため一つ前のページに戻りました。"
+    end
   end
 
   def new
@@ -33,7 +38,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_products = CartProduct.where(customer_id: current_customer.id)
     @customer = current_customer
-    
+
     if params[:address] == "customer_address"
       @order.postcode = @customer.postcode
       @order.address = @customer.address
