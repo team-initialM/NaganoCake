@@ -1,20 +1,27 @@
 class Public::CartProductsController < ApplicationController
+  before_action :authenticate_customer!, except:[:create]
+
   def index
     @cart_products = CartProduct.where(customer_id: current_customer.id)
   end
 
   def create
-    @cart_product = current_customer.cart_products.build(cart_product_params)
-    @cart_products = current_customer.cart_products.all
-    @cart_products.each do |cart_product|
-      if cart_product.product_id == @cart_product.product_id
-        new_quantity = cart_product.quantity + @cart_product.quantity
-        cart_product.update_attribute(:quantity, new_quantity)
-        @cart_product.delete
+    if customer_signed_in?
+      @cart_product = current_customer.cart_products.build(cart_product_params)
+      @cart_products = current_customer.cart_products.all
+      @cart_products.each do |cart_product|
+        if cart_product.product_id == @cart_product.product_id
+          new_quantity = cart_product.quantity + @cart_product.quantity
+          cart_product.update_attribute(:quantity, new_quantity)
+          @cart_product.delete
+        end
       end
+      @cart_product.save
+      redirect_to cart_products_path
+    else
+      redirect_to customer_session_path
+      flash[:notice] = "Please log in before inserting it into your cart."
     end
-    @cart_product.save
-    redirect_to cart_products_path
   end
 
   def update
