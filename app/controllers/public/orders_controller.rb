@@ -8,7 +8,7 @@ class Public::OrdersController < ApplicationController
     unless params[:id] == "confirm"
       @order = Order.find(params[:id])
       @order_products = @order.order_products
-      total(@order_products)
+      order_total(@order_products)
     else
       redirect_to request.referer
       flash[:notice] = "更新ボタンが押されたため一つ前のページに戻りました。"
@@ -61,11 +61,8 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:shipping_address][:address]
       @order.address_name = params[:shipping_address][:address_name]
     end
-    @cart_products.each do |cart_product|
-      @tax_price = include_tax(cart_product.product.price)
-      @cart_total = @cart_total.to_i + @tax_price * cart_product.quantity
-    end
-    @order.total_price =(@cart_total + @order.postage).to_i
+    total(@cart_products)
+    @order.total_price = @total_price.to_i + @order.postage.to_i
   end
 
   def complete
