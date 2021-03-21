@@ -29,11 +29,11 @@
       <%= fields_for :shipping_address do |a| %>
       <div class="form-group row">
         <%= a.label :postcode, "郵便番号(ハイフンなし)", class: "col-3" %>
-        <%= a.text_field :postcode, placeholder: "0000000", class: "form-control col-4" %>
+        <%= a.text_field :postcode, placeholder: "0000000", class: "form-control col-4", id: "customer_postcode" %>
       </div>
       <div class="form-group row">
         <%= a.label :address, "住所", class: "col-3" %>
-        <%= a.text_field :address, placeholder: "東京都渋谷区代々木新園町0-0", class: "form-control col-8" %>
+        <%= a.text_field :address, placeholder: "東京都渋谷区代々木新園町0-0", class: "form-control col-8", id: "customer_address" %>
       </div>
       <div class="form-group row">
         <%= a.label :address_name, "宛名", class: "col-3" %>
