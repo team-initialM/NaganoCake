@@ -16,7 +16,7 @@
   @import "bootstrap";
   @import 'font-awesome-sprockets';
   @import 'font-awesome';
-
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
 dl dt {
   float: left;
@@ -36,4 +36,13 @@ li {
 
 header a {
   color: white;
+}
+
+.page_title {
+  background-color: #dddddd;
+}
+
+.footer_logo{
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
 }
