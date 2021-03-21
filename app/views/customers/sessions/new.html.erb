@@ -1,18 +1,12 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="col-10 offset-1">
+  <h2 class="my-5 page_title">ログイン</h2>
+  <div class="customer px-2">
+    <h5 class="page_title mb-4">会員の方はこちらからログイン</h5>
+    <%= render 'layouts/login-form', model: @customer, url: customer_session_path %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="no-customer pt-5">
+    <h5 class="page_title mb-4">会員登録がお済みでない方</h5>
+    <%# ここのpタグの文字のサイズはcssで！ %>
+    <p class="col-8 offset-2" style="font-size: 18px;"><%= link_to "こちら", new_customer_registration_path %>　から新規登録を⾏ってください。</p>
   </div>
-
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+</div>
