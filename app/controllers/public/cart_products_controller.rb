@@ -33,8 +33,8 @@ class Public::CartProductsController < ApplicationController
   end
 
   def destroy_all
-    @cart_products = Cart.where(customer_id: current_customer.id)
-    @cart_products.destroy
+    @cart_products = CartProduct.where(customer_id: current_customer.id)
+    @cart_products.destroy_all
     redirect_to cart_products_path
     flash[:notice] = "All selected items has been removed from the cart."
   end
