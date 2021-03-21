@@ -1,15 +1,16 @@
-<div class="Menu container">マイページ</div>
+<div class="page_title offset-1 my-3">マイページ</div>
 <div class="container">
-  <h2>登録情報<%= link_to "編集する", edit_customers_path, class: "btn btn-success" %></h2>
-</div>
-氏名　<%= current_customer.firstname %><%= current_customer.lastname %><br />
-カナ　<%= current_customer.kana_firstname %><%= current_customer.kana_lastname %><br />
-郵便番号 <%= current_customer.postcode %><br />
-住所 <%= current_customer.address %><br />
-電話番号 <%= current_customer.phone_number %><br />
-メールアドレス <%= current_customer.email %><br />
-
-<div class="container">
-  <div class="row">配送先：<%= link_to "一覧を見る", shipping_addresses_path %></div>
-  <div class="row"><%= link_to "注文履歴一覧", orders_path %></div>
+  <strong>登録情報<%= link_to "編集する", edit_customers_path, class: "btn btn-success btn-sm mx-3 col-1" %></strong>
+  <table class="table table-bordered my-3">
+    <thead class="thead-light">
+    <tr><th>氏名</th><td><%= add_space_fullname(current_customer.firstname, current_customer.lastname) %></td></tr>
+    <tr><th>カナ</th><td><%= add_space_fullname(current_customer.kana_firstname, current_customer.kana_lastname) %></td></tr>
+    <tr><th>郵便番号</th><td><%= current_customer.postcode %></td></tr>
+    <tr><th>住所</th><td><%= current_customer.address %></td></tr>
+    <tr><th>電話番号</th><td><%= current_customer.phone_number %></td></tr>
+    <tr><th>メールアドレス</th><td><%= current_customer.email %></td></tr>
+    </thead>
+  </table>
+  <strong><p>配送先　<%= link_to "一覧を見る", shipping_addresses_path, class: "btn btn-primary btn-sm col-2 my-2 mx-3" %></p></strong>
+  <strong><p>注文履歴<%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-sm col-2 my-2 mx-3" %></p></strong>
 </div>

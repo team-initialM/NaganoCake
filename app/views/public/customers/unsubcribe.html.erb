@@ -1,5 +1,20 @@
-本当に退会する？
-<%= link_to "退会しない", show_customers_path(current_customer) %>
-<%= form_with model: current_customer, url: withdraw_customers_path, method: :patch, class: "container", local: true do |f| %>
-<%= f.submit "退会する" %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center my-3">
+    <strong>本当に退会しますか？</strong>
+  </div>
+  <div class="row justify-content-center mt-3">
+    退会すると、会員登録や
+  </div>
+  <div class="row justify-content-center">
+    これまでの購入履歴が閲覧できなくなります。
+  </div>
+  <div class="row justify-content-center mb-3">
+    退会する場合は、「退会する」をクリックしてください。
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-center my-3">
+    <%= link_to "退会しない", show_customers_path(current_customer), class: "btn btn-primary btn-sm col-2 mx-2" %>
+    <%= link_to "退会する", withdraw_customers_path, method: :patch, class: "btn btn-danger btn-sm col-2 mx-2" %>
+  </div>
+  </div>
