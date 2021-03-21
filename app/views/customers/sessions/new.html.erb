@@ -2,18 +2,7 @@
   <h2 class="my-5 page_title">ログイン</h2>
   <div class="customer px-2">
     <h5 class="page_title mb-4">会員の方はこちらからログイン</h5>
-    <div class="login-form col-10 offset-1">
-      <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
-        <dl>
-          <dt><%= f.label :email, "メールアドレス", class: 'mr-5 pt-1' %></dt>
-          <dd><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com', class: 'form-control col-7' %></dd>
-          <dt><%= f.label :password, "パスワード", class: 'mr-5 pt-1' %></dt>
-          <dd><%= f.password_field :password, autofocus: true, autocomplete: "current-password", class: 'form-control col-7' %></dd>
-          <dt></dt>
-          <dd><%= f.submit "ログイン", class: 'btn btn-primary px-5 py-2 my-3' %></dd>
-        </dl>
-      <% end %>
-    </div>
+    <%= render 'layouts/login-form', model: @customer, url: customer_session_path %>
   </div>
   <div class="no-customer pt-5">
     <h5 class="page_title mb-4">会員登録がお済みでない方</h5>
