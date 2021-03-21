@@ -40,7 +40,7 @@
   </div>
   <div class="row my-4">
     <strong class="mx-4">お届け先</strong>
-      〒<%= @order.postcode %><%= @order.address %><br>
+      <%= @order.postcode %><%= @order.address %><br>
       <%= @order.address_name %>
   </div>
   <%= form_with model: @order, local: true do |f| %>

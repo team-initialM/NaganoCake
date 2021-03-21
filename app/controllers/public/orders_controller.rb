@@ -11,7 +11,7 @@ class Public::OrdersController < ApplicationController
       order_total(@order_products)
     else
       redirect_to request.referer
-      flash[:notice] = "更新ボタンが押されたため一つ前のページに戻りました。"
+      flash[:notice] = "更新ボタンが押されたたか入力エラーが発生したため、入力ページにリダイレクトされました。"
     end
   end
 
@@ -39,27 +39,28 @@ class Public::OrdersController < ApplicationController
     @cart_products = CartProduct.where(customer_id: current_customer.id)
     @customer = current_customer
 
-    if params[:address] == "customer_address"
+    case params[:address]
+    when "customer_address"
       @order.postcode = @customer.postcode
       @order.address = @customer.address
       @order.address_name = @customer.firstname + @customer.lastname
 
-    elsif params[:address] == "existing_shipping_address"
+    when "existing_shipping_address"
       @order.postcode = params[:order][:postcode]
       @order.address = params[:order][:address]
       @order.address_name = params[:order][:address_name]
 
-    elsif params[:address] == "add_shipping_address"
-      @add_shipping_address = ShippingAddress.new
-      @add_shipping_address.customer_id = @customer.id
-      @add_shipping_address.address = params[:shipping_address][:address]
-      @add_shipping_address.address_name = params[:shipping_address][:address_name]
-      @add_shipping_address.postcode = params[:shipping_address][:postcode]
-      @add_shipping_address.save
-
-      @order.postcode = params[:shipping_address][:postcode]
-      @order.address = params[:shipping_address][:address]
-      @order.address_name = params[:shipping_address][:address_name]
+    else
+      if params[:shipping_address][:address].present? || params[:shipping_address][:address_name].present? || params[:shipping_address][:postcode].present?
+        @add_shipping_address = ShippingAddress.new
+        @add_shipping_address.customer_id = @customer.id
+        @add_shipping_address.address = params[:shipping_address][:address]
+        @add_shipping_address.address_name = params[:shipping_address][:address_name]
+        @add_shipping_address.postcode = params[:shipping_address][:postcode]
+        @add_shipping_address.save
+      else
+        redirect_to confirm_orders_path
+      end
     end
     total(@cart_products)
     @order.total_price = @total_price.to_i + @order.postage.to_i
