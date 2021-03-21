@@ -1,6 +1,6 @@
-<div class="row">注文履歴一覧</div>
-<table class="table">
-  <thead>
+<div class="page_title offset-1 my-3">注文履歴一覧</div>
+<table class="table table-bordered">
+  <thead class="thead-light">
     <tr>
       <th>注文日</th>
       <th>配送先</th>
@@ -14,20 +14,20 @@
   <tbody>
     <% @orders.each do |order| %>
     <tr>
-      <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+      <td class="align-middle"><%= order.created_at.strftime('%Y/%m/%d') %></td>
       <td>
-        <%= order.postcode %>
-        <%= order.address %>
+        <%= order.postcode %><br>
+        <%= order.address %><br>
         <%= order.address_name %>
       </td>
-      <td><%= order.total_price %>円</td>
-      <td>
+      <td class="align-middle">
         <% order.order_products.each do |order_product| %>
-          <%= order_product.product.name %> <br>
+          <%= order_product.product.name %><br>
         <% end %>
       </td>
-      <td><%= order.order_status %></td>
-      <td><%= link_to "表示する", order_path(order) %></td>
+      <td class="align-middle"><%= order.total_price.to_s(:delimited) %>円</td>
+      <td class="align-middle"><%= order.order_status %></td>
+      <td class="align-middle"><%= link_to "表示する", order_path(order), class: "btn btn-sm btn-primary offset-2 col-7" %></td>
     </tr>
     <% end %>
   </tbody>
