@@ -9,14 +9,19 @@ class Public::CartProductsController < ApplicationController
     if customer_signed_in?
       @cart_product = current_customer.cart_products.build(cart_product_params)
       @cart_products = current_customer.cart_products
-      if @cart_products.exists?(product_id: @cart_product.product_id)
-        cart_product = CartProduct.find_by(product_id: @cart_product.product_id)
-        new_quantity = cart_product.quantity + @cart_product.quantity
-        cart_product.update_attribute(:quantity, new_quantity)
-        @cart_product.delete
+      unless @cart_product.quantity == nil
+        if @cart_products.exists?(product_id: @cart_product.product_id)
+          cart_product = CartProduct.find_by(product_id: @cart_product.product_id)
+          new_quantity = cart_product.quantity + @cart_product.quantity
+          cart_product.update_attribute(:quantity, new_quantity)
+       　 @cart_product.delete
+        end
+        @cart_product.save
+        redirect_to cart_products_path
+      else
+        redirect_to request.referer
+        flash[:notice] = "Please select the number of products."
       end
-      @cart_product.save
-      redirect_to cart_products_path
     else
       redirect_to customer_session_path
       flash[:notice] = "Please log in before inserting it into your cart."

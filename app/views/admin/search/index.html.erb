@@ -1,0 +1,74 @@
+<% if @range == "Customer" %>
+<div class="page_title offset-1 my-3">会員一覧</div>
+<table class="table offset-2 col-9">
+  <thead class="thead-light">
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= link_to customer.fullname, admin_customer_path(customer),class: "text-dark" %></td>
+        <td><%= customer.email %></td>
+        <td>
+          <% if customer.is_valid == true %>
+            <div class="text-success">有効</div>
+          <% else %>
+            <div class="text-secondary">退会</div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @customers %>
+<% else %>
+<div class="col-12">
+  <div class="row">
+    <h3 class="my-5 ml-5"><span class = "page_title">商品一覧</span></h3>
+    <div class="mt-5 pt-3 offset-9">
+      <%= link_to "＋", new_admin_product_path, class: 'btn-secondary rounded-circle p-3' %>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="table-active">
+      <tr>
+        <th style="width: 10%">商品ID</th>
+        <th style="width: 30%">商品名</th>
+        <th style="width: 10%">税抜価格</th>
+        <th style="width: 35%">ジャンル</th>
+        <th style="width: 15%">ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td>
+            <%= link_to admin_product_path(product) do %>
+              <%= product.name %>
+            <% end %>
+          </td>
+          <td><%= product.price.to_s(:delimited) %></td>
+          <td><%= product.genre.genre %></td>
+          <%# 販売中と販売停止中の色分けをcssに！ %>
+          <% if product.is_valid == true %>
+            <td>販売中</td>
+          <% else %>
+            <td>販売停止中</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @products %>
+</div>
+
+<% end %>
