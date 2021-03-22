@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/index'
   devise_for :admin, only: :sessions, controllers: {
     sessions: 'admin/sessions'
   }
@@ -45,5 +46,6 @@ Rails.application.routes.draw do
     end
     resources :products, except: :destroy
     resources :genres, only: [:index, :update, :edit, :create]
+    get '/search' => "search#index"
   end
 end

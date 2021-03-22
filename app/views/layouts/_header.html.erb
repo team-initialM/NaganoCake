@@ -13,10 +13,9 @@
           <li style="display: inline-block;"><%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link' %></li>
           <li style="display: inline-block;"><%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link', method: :delete %></li>
           <div class="mr-2">
-          <%# カラム名とか仮！ %>
-            <%= form_with local: true do |f| %>
+            <%= form_with url: admin_search_path, local: true do |f| %>
               <div class="d-flex justify-content-end">
-                <%= f.text_field :search, placeholder: 'Search', class: 'form-control col-5 offset-5' %>
+                <%= f.search_field :search, placeholder: 'Search', class: 'form-control col-5 offset-5' %>
                 <%= f.button type: 'submit', class: 'btn btn-outline-light ml-3' do %>
                   <i class="fa fa-search"></i>
                 <% end %>
