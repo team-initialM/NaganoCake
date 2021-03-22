@@ -16,7 +16,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def new
-    @addresses = current_customer.shipping_addresses
     @cart_products = CartProduct.where(customer_id: current_customer.id)
     @order = Order.new
   end
@@ -46,19 +45,19 @@ class Public::OrdersController < ApplicationController
       @order.address_name = @customer.firstname + @customer.lastname
 
     when "existing_shipping_address"
-      binding.pry
-      @order.postcode = @address.postcode
-      @order.address = @address.address
-      @order.address_name = @address.address_name
+      order_address = ShippingAddress.find(params[:order][:id])
+      @order.postcode = order_address.postcode
+      @order.address = order_address.address
+      @order.address_name = order_address.address_name
 
     when "add_shipping_address"
-      if params[:shipping_address][:address].present? || params[:shipping_address][:address_name].present? || params[:shipping_address][:postcode].present?
+      # if params[:shipping_address][:address].present? || params[:shipping_address][:address_name].present? || params[:shipping_address][:postcode].present?
         @add_shipping_address = ShippingAddress.new
         @add_shipping_address.customer_id = @customer.id
         @add_shipping_address.address = params[:shipping_address][:address]
         @add_shipping_address.address_name = params[:shipping_address][:address_name]
         @add_shipping_address.postcode = params[:shipping_address][:postcode]
-        @add_shipping_address.save
+      if  @add_shipping_address.save
         @order.postcode = params[:shipping_address][:postcode]
         @order.address = params[:shipping_address][:address]
         @order.address_name = params[:shipping_address][:address_name]
