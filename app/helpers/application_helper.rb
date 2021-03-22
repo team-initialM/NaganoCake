@@ -13,15 +13,17 @@ module ApplicationHelper
   end
 
   def total(select_products)
+    @total_price = 0
     select_products.each do |select_product|
-      @total_price = @total_price.to_i + subtotal(select_product)
+      @total_price +=  subtotal(select_product)
     end
     return @total_price
   end
-  
+
   def order_total(select_products)
+    @total_price = 0
     select_products.each do |select_product|
-      @total_price = @total_price.to_i + order_subtotal(select_product)
+      @total_price += order_subtotal(select_product)
     end
     return @total_price
   end

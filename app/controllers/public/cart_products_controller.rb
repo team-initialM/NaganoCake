@@ -8,17 +8,16 @@ class Public::CartProductsController < ApplicationController
   def create
     if customer_signed_in?
       @cart_product = current_customer.cart_products.build(cart_product_params)
-      @cart_products = current_customer.cart_products.all
+      @cart_products = current_customer.cart_products
       unless @cart_product.quantity == nil
-        @cart_products.each do |cart_product|
-          if cart_product.product_id == @cart_product.product_id
-            new_quantity = cart_product.quantity + @cart_product.quantity
-            cart_product.update_attribute(:quantity, new_quantity)
-            @cart_product.delete
-          end
+        if @cart_products.exists?(product_id: @cart_product.product_id)
+          cart_product = CartProduct.find_by(product_id: @cart_product.product_id)
+          new_quantity = cart_product.quantity + @cart_product.quantity
+          cart_product.update_attribute(:quantity, new_quantity)
+       　 @cart_product.delete
         end
-          @cart_product.save
-          redirect_to cart_products_path
+        @cart_product.save
+        redirect_to cart_products_path
       else
         redirect_to request.referer
         flash[:notice] = "Please select the number of products."

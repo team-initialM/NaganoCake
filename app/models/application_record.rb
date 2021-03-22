@@ -6,4 +6,5 @@ class ApplicationRecord < ActiveRecord::Base
   def fullname
     self.firstname + self.lastname
   end
+
 end
