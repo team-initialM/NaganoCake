@@ -7,7 +7,4 @@ class ApplicationRecord < ActiveRecord::Base
     self.firstname + self.lastname
   end
 
-  def params_registred_address
-    "〒" + self.postcode + "  " + self.address + "  " +self.address_name
-  end
 end

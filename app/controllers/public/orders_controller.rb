@@ -10,7 +10,7 @@ class Public::OrdersController < ApplicationController
       @order_products = @order.order_products
       order_total(@order_products)
     else
-      redirect_to request.referer
+      redirect_back(fallback_location: root_path)
       flash[:notice] = "更新ボタンが押されたたか入力エラーが発生したため、入力ページにリダイレクトされました。"
     end
   end
@@ -51,18 +51,15 @@ class Public::OrdersController < ApplicationController
       @order.address_name = order_address.address_name
 
     when "add_shipping_address"
-      # if params[:shipping_address][:address].present? || params[:shipping_address][:address_name].present? || params[:shipping_address][:postcode].present?
-        @add_shipping_address = ShippingAddress.new
-        @add_shipping_address.customer_id = @customer.id
-        @add_shipping_address.address = params[:shipping_address][:address]
-        @add_shipping_address.address_name = params[:shipping_address][:address_name]
-        @add_shipping_address.postcode = params[:shipping_address][:postcode]
+      @add_shipping_address = ShippingAddress.new(shipping_address_params)
+      @add_shipping_address.customer_id = @customer.id
       if  @add_shipping_address.save
-        @order.postcode = params[:shipping_address][:postcode]
-        @order.address = params[:shipping_address][:address]
-        @order.address_name = params[:shipping_address][:address_name]
+        @order.postcode = @add_shipping_address.postcode
+        @order.address = @add_shipping_address.address
+        @order.address_name = @add_shipping_address.address_name
       else
-        redirect_to confirm_orders_path
+        flash[:notice] = "更新ボタンが押されたたか入力エラーが発生したため、入力ページにリダイレクトされました。"
+        redirect_back(fallback_location: root_path)
       end
     end
     total(@cart_products)
@@ -77,4 +74,7 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:customer_id, :order_status, :total_price, :postcode, :address, :address_name, :payment_selection, :postage)
   end
 
+  def shipping_address_params
+    params.require(:shipping_address).permit(:postcode, :address, :address_name)
+  end
 end
