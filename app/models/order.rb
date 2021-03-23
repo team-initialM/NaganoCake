@@ -2,6 +2,15 @@ class Order < ApplicationRecord
   has_many :order_products, dependent: :destroy
   belongs_to :customer
 
+  validates :total_price, presence: true, numericality: { greater_than: 0 }
+  validates :postcode, presence: true
+  validates :address, presence: true
+  validates :address_name, presence: true
+  validates :postage, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :order_status, presence: true
+  validates :payment_selection, presence: true
+  validates :customer, presence: true
+
   def move_products(cart_products)
     cart_products.each do |cart_product|
       OrderProduct.create(order_id: self.id, product_id: cart_product.product_id, quantity: cart_product.quantity, product_price: include_tax(cart_product.product.price))
