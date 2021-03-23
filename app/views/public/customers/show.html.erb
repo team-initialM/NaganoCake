@@ -1,8 +1,8 @@
-<div class = "row">
-<span class="page_title offset-1 my-3">マイページ</span>
+<div class="offset-1 my-3">
+<span class="page_title">マイページ</span>
 </div>
 <div class="row">
-    <strong><p>登録情報　</p></strong><%= link_to "編集する", edit_customers_path, class: "btn btn-success btn-sm col-1 mb-2" %>
+    <strong><span class="align-middle">登録情報　</span></strong><%= link_to "編集する", edit_customers_path, class: "btn btn-success btn-sm col-1 mb-2" %>
 </div>
 <div class = "row">
   <div class = "col-10"></div>
@@ -33,12 +33,12 @@
       </thead>
     </table>
   </div>
-  <div class = "row">
-    <strong><p>配送先　　</p></strong>
-    <%= link_to "一覧を見る", shipping_addresses_path, class: "btn btn-primary btn-sm col-2 mb-2" %>
+  <div class = "row my-3">
+    <strong><p>配送先　</p></strong>
+    <%= link_to "一覧を見る", shipping_addresses_path, class: "btn btn-primary btn-sm col-2 mb-2 offset-1" %>
   </div>
   <div class ="row">
-    <strong><p>注文履歴　</p></strong>
-    <%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-sm col-2 mb-2" %>
+    <strong><p>注文履歴</p></strong>
+    <%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-sm col-2 mb-2 offset-1" %>
   </div>
 </div>

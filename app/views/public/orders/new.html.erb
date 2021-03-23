@@ -1,4 +1,4 @@
-<span class="page_title offset-1 my-3">注文情報入力</span>
+<div class="offset-1 my-2"><span class="page_title">注文情報入力</span></div>
 <div class="container">
 <%= form_with(model: @order, url: confirm_orders_path, local: true) do |f| %>
   <%= f.hidden_field :customer_id, value: current_customer.id %>
@@ -11,7 +11,7 @@
     <%= f.label :銀行振込 %>
   </div>
   <div class="form-group">
-    <strong><p class="row">お届け先</p></strong>
+    <strong><%= f.label :address, "お届け先", class: "row" %></strong>
     <%= radio_button_tag "address", "customer_address", checked: true %>
     <%= f.label "ご自身の住所" %>
     <div class="col">

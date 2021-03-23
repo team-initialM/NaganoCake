@@ -1,5 +1,4 @@
-<div class="col-12">
-  <span class="m-5 pl-3 page_title">商品新規登録</span>
+  <div class="my-4 offset-1"><span class="page_title">商品新規登録</span></div>
   <div class="new-product-form col-8 offset-2">
     <%= render 'admin/shared/error_messages', resource: @product %>
     <%= form_with model: @product, url: admin_products_path, local: true do |f| %>
@@ -25,7 +24,6 @@
           <%= f.label :is_valid, "販売停止中", value: false %>
         </dd>
       </dl>
-      <%= f.submit "新規登録", class: 'btn btn-success rounded-pill btn-lg mb-5 mt-3 py-3 col-4 offset-4' %>
+      <%= f.submit "新規登録", class: 'btn btn-success btn-lg py-3 col-3 offset-4' %>
     <% end %>
   </div>
-</div>

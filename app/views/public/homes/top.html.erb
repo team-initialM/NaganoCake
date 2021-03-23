@@ -10,12 +10,12 @@
   </div>
 </div>
 
-<div class="new-products col-10 offset-1 my-5">
-  <h2 class="p-0">新着商品</h2>
+<div class="new-products mt-4">
+  <p class="font-weight-bold h4">新着商品</p>
   <ul class="d-flex justify-content-center">
     <% @products.each do |product| %>
-      <li class="mr-5">
-        <%= link_to (attachment_image_tag product, :product_image, size: "200x200", fallback: "no_image.jpg"), product_path(product)%>
+      <li>
+        <%= link_to (attachment_image_tag product, :product_image, size: "250x200", fallback: "no_image.jpg"), product_path(product)%>
         <p class="mt-3"><%= product.name %></p>
         <p class="mt-3">¥ <%= include_tax(product.price).to_s(:delimited) %>（税込）</p>
       </li>

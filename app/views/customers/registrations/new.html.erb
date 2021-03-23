@@ -1,4 +1,4 @@
-<span class="page_title offset-1 my-3">新規会員登録</span>
+<div class="my-4 offset-1"><span class="page_title">新規会員登録</span></div>
 
 <%= form_with model: @customer, url: customers_path, id: 'new_user', class: 'new_user container', local: true do |f| %>
 <%= render "customers/shared/error_messages", resource: resource %>
@@ -57,7 +57,7 @@
   <%= f.submit "新規登録" ,class: 'btn-lg btn-sm btn-success offset-3 col-3' %>
 <% end %>
 </div>
-<div class="page_title offset-1 my-3">既に登録済みの方</div>
+<div class="my-4 offset-1"><span class="page_title">既に登録済みの方</span></div>
 
 <div class="container">
   <div class="row offset-1">

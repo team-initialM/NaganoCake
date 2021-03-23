@@ -1,10 +1,9 @@
-<span class = "page_title">ショッピングカート</span>
+<div class="row justify-content-between m-3"><div><span class="page_title">ショッピングカート</span></div>
 
 <% if @cart_products.present? %>
-<div class = "col-12 d-flex justify-content-end mb-2">
   <%= link_to "カートを空にする", destroy_all_cart_products_path, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger offset-8" %>
 </div>
-<table class="col-12 table table-bordered">
+<table class="table table-bordered">
   <thead class="thead-light">
     <tr>
       <th style = "width:40%">商品名</th>
@@ -18,7 +17,7 @@
     <% @cart_products.each do |cart_product| %>
     <tr>
       <td class = "align-middle">
-        <%= attachment_image_tag cart_product.product, :product_image, :fill, 60, 60 %>
+        <%= attachment_image_tag cart_product.product, :product_image, :fill, 60, 60, fallback: "no_image.jpg" %>
         <%= cart_product.product.name %>
       </td>
       <td class = "align-middle">
@@ -39,7 +38,8 @@
 </table>
 
 <% else %>
-  <p>カート内に商品はありません。</p>
+</div>
+  <p class="mx-4">カート内に商品はありません。</p>
 
 <% end %>
 
@@ -62,7 +62,7 @@
   </table>
 </div>
 
-  <div class = "col-12 d-flex justify-content-center">
+  <div class = "row justify-content-center my-4">
     <%= link_to "情報入力に進む", new_order_path, class:"btn btn-success" %>
   </div>
 <% end %>

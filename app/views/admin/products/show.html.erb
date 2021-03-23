@@ -1,11 +1,10 @@
-<div class="col-12">
-  <span class="m-5 pl-5 page_title">商品詳細</span>
-  <div class="product-show col-12 d-flex pt-5 mb-5">
+
+  <div class="my-4 offset-1"><span class="page_title">商品詳細</span></div>
+  <div class="product-show row my-5">
     <div class="product-img mx-5">
       <%= attachment_image_tag @product, :product_image, size: "400x300", fallback: "no_image.jpg" %>
     </div>
     <div class="product-info ml-5">
-    <%# 商品名などのfontsizeはcssで！ %>
       <table>
         <tbody>
           <tr>
@@ -36,7 +35,6 @@
       </table>
     </div>
   </div>
-  <%= link_to "編集する", edit_admin_product_path(@product), class: 'btn btn-success rounded-pill btn-lg my-5 py-3 col-2 offset-5' %>
-</div>
+  <%= link_to "編集する", edit_admin_product_path(@product), class: 'btn btn-success btn-lg py-3 col-2 offset-7' %>
 
 

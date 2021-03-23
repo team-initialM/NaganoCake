@@ -1,17 +1,15 @@
-<div class="col-12">
-  <span class="page_title">配送先編集</span>
+<div class="offset-1 my-4"><span class="page_title">配送先編集</span></div>
   <%= form_with model: @shipping_address, local:true do |f| %>
   <dl>
     <dt class = "col-3"><%= f.label :shipping_address_postcode, "郵便番号(ハイフンなし)" %></dt>
     <dd class><%= f.text_field :postcode, class: 'form-control col-4', id: "customer_postcode" %></dd>
     <dt class = "col-3"><%= f.label :shipping_address_address, "住所" %></dt>
-    <dd><%= f.text_field :address, class: 'form-control col-7', id: "customer_address" %></dd>
+    <dd><%= f.text_field :address, class: 'form-control col-6', id: "customer_address" %></dd>
     <dt class = "col-3"><%= f.label :shipping_address_address_name, "宛名" %></dt>
-    <dd class = "form-inline">
+    <dd class = "row">
       <%= f.text_field :address_name, class: 'form-control col-4' %>
-      <%= f.submit '変更内容を保存', class: "btn btn-success offset-2" %>
+      <%= f.submit '変更内容を保存', class: "btn btn-success offset-5" %>
     </dd>
   </dl>
 <% end %>
   </div>
-</div>
