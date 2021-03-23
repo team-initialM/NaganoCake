@@ -85,6 +85,7 @@ header {
 
 .page_title {
   background-color: #dddddd;
+  padding: 0.1em 1.2em;
 }
 
 .footer_logo{
@@ -123,4 +124,8 @@ ul.pagination {
   &:hover {
     color: #000000;
   }
+}
+
+.more-search-row {
+  padding-top: 96px;
 }
