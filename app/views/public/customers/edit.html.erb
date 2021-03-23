@@ -1,4 +1,4 @@
-<span class="page_title offset-1 my-3">会員情報変更画面</span>
+<div class="offset-1 my-4"><span class="page_title">会員情報変更画面</span></div>
 
 <%= form_with model: current_customer, url: customers_path, class: "container", local: true do |f| %>
  <div class="row my-3">
@@ -28,7 +28,7 @@
   <%= f.email_field :email, autofocus: true, class: "form-control col-4" %>
 </div>
 <div class="row my-4">
-  <%= f.submit "編集内容を保存" ,class: 'btn-lg btn-sm btn-success offset-2 col-4' %>
+  <%= f.submit "編集内容を保存" ,class: 'btn btn-success offset-2 col-4' %>
   <%= link_to "退会する", unsubcribe_customers_path, class: "btn btn-danger offset-4" %>
 </div>
 <% end %>
