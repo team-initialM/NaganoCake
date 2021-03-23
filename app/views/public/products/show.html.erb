@@ -1,18 +1,17 @@
-
-  <div class="row justify-content-center my-5">
-    <div class="product-img mx-4">
-      <%= attachment_image_tag @product, :product_image, size: "400x300", fallback: "no_image.jpg" %>
-    </div>
-    <div class="product-info col-6">
-      <h2><%= @product.name %></h2>
-      <p class="my-3" style="font-size: 24px;"><%= @product.description %></p>
-      <p class="mb-5" style="font-size: 28px;">¥ <%= include_tax(@product.price).to_s(:delimited) %><span style="font-size: 13px;">（税込）</span></p>
-      <%= form_with model: @cart_product, local: true do |f| %>
-        <%= f.hidden_field :product_id, value:@product.id %>
-        <div class="row">
-          <%= f.select :quantity, (1..50).each{ |n| n }, { include_blank: "個数選択" }, { class: 'form-control col-4' } %>
-          <%= f.submit "カートに入れる", class: 'btn btn-success ml-5' %>
-        </div>
-      <% end %>
-    </div>
+<div class="row justify-content-center my-5">
+  <div class="product-img mx-4">
+    <%= attachment_image_tag @product, :product_image, size: "400x300", fallback: "no_image.jpg" %>
   </div>
+  <div class="product-info col-6">
+    <h2><%= @product.name %></h2>
+    <p class="my-3" style="font-size: 24px;"><%= @product.description %></p>
+    <p class="mb-5" style="font-size: 28px;">¥ <%= include_tax(@product.price).to_s(:delimited) %><span style="font-size: 13px;">（税込）</span></p>
+    <%= form_with model: @cart_product, local: true do |f| %>
+      <%= f.hidden_field :product_id, value:@product.id %>
+      <div class="row">
+        <%= f.select :quantity, (1..50).each{ |n| n }, { include_blank: "個数選択" }, { class: 'form-control col-4' } %>
+        <%= f.submit "カートに入れる", class: 'btn btn-success ml-5' %>
+      </div>
+    <% end %>
+  </div>
+</div>

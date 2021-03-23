@@ -12,8 +12,9 @@
     <dt><%= f.label :genre_id, "ジャンル", class: 'mr-5' %></dt>
     <dd><%= f.collection_select :genre_id, Genre.all, :id, :genre, { :prompt => "-- 選択してください --" }, { class: 'form-control col-7' } %></dd>
     <dt><%= f.label :price, "税抜価格", class: 'mr-5' %></dt>
-    <div class="row">
-      <dd class="col-10"><%= f.text_field :price, placeholder: '1000', class: 'form-control' %><div class="align-self-end">　円</div></dd>
+    <div class="d-flex">
+      <dd class="col-10 p-0"><%= f.text_field :price, placeholder: '1000', class: 'form-control col-11' %></dd>
+      <dd style="margin-left: -30px;">円</dd>
     </div>
       <dt><%= f.label :is_valid, "販売ステータス", class: 'mr-5' %></dt>
       <dd>
@@ -22,7 +23,7 @@
         <%= f.radio_button :is_valid, :false %>
         <%= f.label :is_valid, "販売停止中", value: false %>
       </dd>
-    </dl>
+  </dl>
     <%= f.submit "変更を保存", class: 'btn btn-success btn-lg py-3 col-3 offset-4' %>
   <% end %>
 </div>

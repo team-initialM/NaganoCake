@@ -16,21 +16,21 @@
   </thead>
   <tbody>
     <% @products.each do |product| %>
-      <tr>
-        <td><%= product.id %></td>
-        <td>
-          <%= link_to admin_product_path(product) do %>
-            <%= product.name %>
-          <% end %>
-        </td>
-        <td><%= product.price.to_s(:delimited) %></td>
-        <td><%= product.genre.genre %></td>
-        <% if product.is_valid == true %>
-          <td class="text-success">販売中</td>
-        <% else %>
-          <td class="text-secondary">販売停止中</td>
+    <tr>
+      <td><%= product.id %></td>
+      <td>
+        <%= link_to admin_product_path(product) do %>
+          <%= product.name %>
         <% end %>
-      </tr>
+      </td>
+      <td><%= product.price.to_s(:delimited) %></td>
+      <td><%= product.genre.genre %></td>
+      <% if product.is_valid == true %>
+        <td class="text-success">販売中</td>
+      <% else %>
+        <td class="text-secondary">販売停止中</td>
+      <% end %>
+    </tr>
     <% end %>
   </tbody>
 </table>
