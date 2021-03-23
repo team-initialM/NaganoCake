@@ -7,8 +7,9 @@ class Order < ApplicationRecord
   validates :address, presence: true
   validates :address_name, presence: true
   validates :postage, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :order_status, exclusion: { in: [nil] }
-  validates :payment_selection, exclusion: { in: [nil] }
+  validates :order_status, presence: true
+  validates :payment_selection, presence: true
+  validates :customer, presence: true
 
   def move_products(cart_products)
     cart_products.each do |cart_product|
