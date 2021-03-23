@@ -25,6 +25,20 @@
   box-sizing: border-box;
 }
 
+a {
+  color: black;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.fa-plus-circle {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 dl dt {
   float: left;
   clear: both;
@@ -51,6 +65,10 @@ header {
 
   a {
     color: white;
+  }
+
+  li {
+    display: inline-block;
   }
 }
 
@@ -80,8 +98,29 @@ footer {
   bottom: 0;
   height: 60px;
   padding-bottom: 60px;
+  z-index: 10;
 }
 
 .footer-div {
   margin-bottom: 60px;
+}
+
+ul.pagination {
+  justify-content: center;
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #a3a3a3;
+  border-color: #868686;
+}
+
+.page-link {
+  color: #000000;
+
+  &:hover {
+    color: #000000;
+  }
 }
