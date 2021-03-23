@@ -14,8 +14,8 @@
           <div class="mr-2">
             <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
               <div class="d-flex justify-content-end">
-                <%= f.select :range, options_for_select([['Customer'], ['Product']]) %>
-                <%= f.text_field :word, placeholder: 'Search', class: 'form-control col-5 offset-5' %>
+                <%= f.text_field :word, placeholder: 'Search', class: 'form-control col-6 offset-5' %>
+                <a class = "btn btn-outline-light ml-3" data-toggle="collapse" href="#moresearch" role="button" aria-expanded="false" aria-controls="more-search"><i class="fas fa-plus"></i></a>
                 <%= f.button type: 'submit', class: 'btn btn-outline-light ml-3' do %>
                   <i class="fa fa-search"></i>
                 <% end %>
@@ -38,4 +38,24 @@
     </div>
   </nav>
 </header>
+
+<div class="row more-search-row">
+  <div class="col">
+    <div class="collapse more-search-collapse" id="moresearch">
+      <div class="card card-body">
+        <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+          <div class="d-flex justify-content-end">
+            <p class = "col-3 text-center text-secondary mb-0 mt-2">会員・注文・商品ごとに検索ができます。</p>
+            <%= f.select :range, options_for_select([['Customer'], ['Product']]), {}, class: "form-control col-1 ml-5 text-secondary" %>
+            <%= f.text_field :word, placeholder: 'Search', class: 'form-control col-3 ml-5' %>
+            <%= f.button type: 'submit', class: 'btn btn-outline-secondary ml-5 ' do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="header-div"></div>
