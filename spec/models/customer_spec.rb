@@ -32,7 +32,7 @@ RSpec.describe Customer, type: :model do
     expect(customer).to be_invalid
   end
 
-  it 'is invalid with a duplicate email address' do
+  it 'is invalid with a duplicate email' do
     other_customer = FactoryBot.build(:customer, email: customer.email)
     other_customer.valid?
     expect(other_customer.errors[:email]).to include("has already been taken")
