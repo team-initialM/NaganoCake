@@ -8,7 +8,7 @@ RSpec.describe ShippingAddress, type: :model do
     expect(shipping_address).to be_valid
   end
 
-  it 'is invalid without a customer_id' do
+  it 'is invalid when customer_id is nil' do
     shipping_address.customer_id = nil
     expect(shipping_address).to be_invalid
   end

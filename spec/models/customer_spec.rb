@@ -61,4 +61,9 @@ RSpec.describe Customer, type: :model do
   it 'is true is_valid with a default customer' do
     expect(customer.is_valid).to eq true
   end
+
+  it 'is invalid when is_valid is nil' do
+    customer.is_valid = nil
+    expect(customer).to be_invalid
+  end
 end
