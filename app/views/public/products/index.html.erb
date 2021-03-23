@@ -1,6 +1,5 @@
 <div class="col-12">
-  <%# spanの文字サイズはcssに！ %>
-  <h3 class="my-5">商品一覧<span style="font-size: 18px;">（全<%= @products.count %>件）</span></h3>
+  <span class="my-5">商品一覧<span style="font-size: 18px;">（全<%= @products.count %>件）</span></span>
   <ul class="product-list d-flex flex-wrap justify-content-center">
     <% @products.each do |product| %>
       <li class="product-list-item mx-3 mt-5">

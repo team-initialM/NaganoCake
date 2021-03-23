@@ -1,8 +1,8 @@
 <div class="col-12">
-  <div class="row">
-    <h3 class="my-5 ml-5"><span class = "page_title">商品一覧</span></h3>
-    <div class="mt-5 pt-3 offset-9">
-      <%= link_to "＋", new_admin_product_path, class: 'btn-secondary rounded-circle p-3' %>
+  <div class="row justify-content-between">
+    <span class="my-5 ml-5"><span class = "page_title">商品一覧</span></span>
+    <div class="mt-5">
+      <%= link_to "", new_admin_product_path, class: 'fas fa-plus-circle fa-3x text-secondary' %>
     </div>
   </div>
   <table class="table">
@@ -26,11 +26,10 @@
           </td>
           <td><%= product.price.to_s(:delimited) %></td>
           <td><%= product.genre.genre %></td>
-          <%# 販売中と販売停止中の色分けをcssに！ %>
           <% if product.is_valid == true %>
-            <td>販売中</td>
+            <td class="text-success">販売中</td>
           <% else %>
-            <td>販売停止中</td>
+            <td class="text-secondary">販売停止中</td>
           <% end %>
         </tr>
       <% end %>

@@ -1,4 +1,4 @@
-<div class="page_title offset-1 my-3">注文情報入力</div>
+<span class="page_title offset-1 my-3">注文情報入力</span>
 <div class="container">
 <%= form_with(model: @order, url: confirm_orders_path, local: true) do |f| %>
   <%= f.hidden_field :customer_id, value: current_customer.id %>

@@ -1,5 +1,5 @@
 <div class="col-12">
-  <h3 class="m-5 pl-5 page_title">商品詳細</h3>
+  <span class="m-5 pl-5 page_title">商品詳細</span>
   <div class="product-show col-12 d-flex pt-5 mb-5">
     <div class="product-img mx-5">
       <%= attachment_image_tag @product, :product_image, size: "400x300", fallback: "no_image.jpg" %>
@@ -26,11 +26,10 @@
           </tr>
           <tr>
             <td class="pt-3 pr-5">販売ステータス</td>
-            <%# 販売中、販売停止中の色分けはcssで！ fontsizeは20px! %>
             <% if @product.is_valid == true %>
-              <td class="pt-3">販売中</td>
+              <td class="pt-3 text-success">販売中</td>
             <% else %>
-              <td class="pt-3">販売停止中</td>
+              <td class="pt-3 text-secondary">販売停止中</td>
             <% end %>
           </tr>
         </tbody>
