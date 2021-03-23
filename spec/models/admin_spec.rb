@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Admin, type: :model do
   let(:admin) { FactoryBot.create(:admin) }
 
-  it 'is valid factory' do
+  it 'has a valid factory' do
     expect(admin).to be_valid
   end
 
