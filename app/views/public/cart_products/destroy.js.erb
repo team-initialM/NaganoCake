@@ -1,0 +1,10 @@
+if(<%= @cart_products.present? %>) {
+  $("#cart-products-content").html("<%= j(render 'cart-products-content', cart_products: @cart_products) %>");
+} else {
+  $("#cart-products").html("<p>カート内に商品はありません。</p>");
+  $("#cart-links").html("<%= j(render 'keep-cart-button') %>");
+  $("#cart-order-link").html("");
+};
+<% flash.each do |type, message| %>
+  $('#notice').html("<%= message %>");
+<% end %>

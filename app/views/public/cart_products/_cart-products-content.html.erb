@@ -1,0 +1,38 @@
+<div class="col-12 d-flex justify-content-end mb-2">
+  <%= link_to "カートを空にする", destroy_all_cart_products_path, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger offset-8", remote: true %>
+</div>
+<table class="col-12 table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th style="width:40%">商品名</th>
+      <th style="width:15%">単価(税込)</th>
+      <th style="width:15%">数量</th>
+      <th style="width:15%">小計</th>
+      <th style="width:15%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cart_products.each do |cart_product| %>
+    <tr>
+      <td class="align-middle">
+        <%= attachment_image_tag cart_product.product, :product_image, :fill, 60, 60 %>
+        <%= cart_product.product.name %>
+      </td>
+      <td class="align-middle">
+        <%= include_tax(cart_product.product.price) %>
+      </td>
+      <td class="align-middle">
+        <%= form_with model:cart_product, url: cart_product_path(cart_product) do |f| %>
+          <%= f.hidden_field :product_id, value: cart_product.product_id %>
+          <%= f.select :quantity, (1..50).each{ |n| n }, placeholder: "quantity" %>
+          <%= f.submit "変更", class:"btn btn-success" %>
+        <% end %>
+      </td>
+      <td class="align-middle" id="cart-subtotal-<%= cart_product.id %>">
+        <%= (subtotal(cart_product)).to_s(:delimited) %>
+      </td>
+      <td class="align-middle text-center"><%= link_to "削除する", cart_product_path(cart_product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", remote: true %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
