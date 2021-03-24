@@ -12,6 +12,6 @@ class Product < ApplicationRecord
   validates :is_valid, inclusion: { in: [true, false] }
 
   def self.looks(searches, words)
-    @products = Product.where(['genre_id LIKE ? OR name LIKE ? OR is_valid LIKE ?', "%#{words}%", "%#{words}%", "%#{words}%"])
+    @products = Product.where(['name LIKE ?', "%#{words}%"])
   end
 end

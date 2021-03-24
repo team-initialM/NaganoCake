@@ -17,6 +17,17 @@ class Customer < ApplicationRecord
   validates :is_valid, inclusion: { in: [true, false] }
 
   def self.looks(searches, words)
-    @customers = Customer.where(['email LIKE ? OR firstname || lastname LIKE ?', "%#{words}%", "%#{words}%"])
+    @customers = Customer.where(['email LIKE ? 
+    OR firstname || lastname LIKE ? 
+    OR kana_firstname || kana_lastname LIKE ? 
+    OR postcode LIKE ?
+    OR address LIKE ?
+    OR phone_number LIKE ? ', 
+    "%#{words}%", 
+    "%#{words}%", 
+    "%#{words}%", 
+    "%#{words}%", 
+    "%#{words}%", 
+    "%#{words}%"])
   end
 end

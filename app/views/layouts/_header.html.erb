@@ -45,8 +45,8 @@
       <div class="card card-body">
         <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
           <div class="d-flex justify-content-end">
-            <p class = "col-3 text-center text-secondary mb-0 mt-2">会員・注文・商品ごとに検索ができます。</p>
-            <%= f.select :range, options_for_select([['Customer'], ['Product']]), {}, class: "form-control col-1 ml-5 text-secondary" %>
+            <p class = "col-4 text-center text-secondary mb-0 mt-2">会員情報・商品名・注文者名の検索ができます。</p>
+            <%= f.select :range, options_for_select([['会員情報'], ['商品名'],["注文者名"]]), {}, class: "form-control col-1 ml-5 text-secondary" %>
             <%= f.text_field :word, placeholder: 'Search', class: 'form-control col-3 ml-5' %>
             <%= f.button type: 'submit', class: 'btn btn-outline-secondary ml-5 ' do %>
               <i class="fa fa-search"></i>
