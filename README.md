@@ -4,7 +4,7 @@
 
 ## アプリトップページ
 
-![アプリトップページ](https://d.kuku.lu/e7f3fd03be)
+<img width="1440" alt="スクリーンショット 2021-03-24 15 59 34" src="https://user-images.githubusercontent.com/71312197/112268995-2310ab00-8cbb-11eb-938a-d36307e08915.png">
 
 
 ## 概要
