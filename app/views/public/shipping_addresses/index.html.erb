@@ -1,6 +1,6 @@
-<%= render 'customers/shared/error_messages', resource: @shipping_address %>
+<div id="error_messages"><%= render 'customers/shared/error_messages', resource: @shipping_address %></div>
 <div class="offset-1 my-4"><span class="page_title">配送先登録/一覧</span></div>
-<%= form_with model: @shipping_address, url: shipping_addresses_path, local:true do |f| %>
+<%= form_with model: @shipping_address, url: shipping_addresses_path, remote: true do |f| %>
   <div class="row my-3">
     <%= f.label :shipping_address_postcode, "郵便番号(ハイフンなし)", class: 'col-3' %></dt>
     <%= f.text_field :postcode, class: 'form-control col-3', id: "customer_postcode", placeholder: "0000000" %></dd>
@@ -16,7 +16,7 @@
       <%= f.submit '新規登録', class: 'btn btn-success offset-3 col-2'  %>
   </div>
 <% end %>
-<table class="table table-bordered col-10 mt-5">
+<table class="table table-bordered col-10 mt-5" id="shipping_address">
   <thead class="thead-light">
     <tr>
       <th style="width:10%">郵便番号</th>
@@ -27,21 +27,9 @@
   </thead>
   <tbody>
     <% @shipping_addresses.each do |shipping_address| %>
-    <tr>
-      <td>
-        <%= shipping_address.postcode %>
-      </td>
-      <td>
-        <%= shipping_address.address %>
-      </td>
-      <td>
-        <%= shipping_address.address_name %>
-      </td>
-      <td style="text-align:center">
-        <%= link_to "編集する", edit_shipping_address_path(shipping_address.id), class:"btn btn-success" %>
-        <%= link_to "削除する", shipping_address_path(shipping_address.id), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
-      </td>
-    </tr>
+    
+      <%= render "public/shipping_addresses/shipping_address_list", shipping_address: shipping_address %>
+
     <% end %>
   </tbody>
 </table>
