@@ -1,6 +1,6 @@
 <div class="offset-1 my-4"><span class="page_title">会員情報変更画面</span></div>
 
-<%= form_with model: current_customer, url: customers_path, class: "container" do |f| %>
+<%= form_with model: current_customer, url: customers_path, class: "container", local: true do |f| %>
  <div class="row my-3">
   <%= f.label "氏名", class: "col-2" %>
   <%= f.text_field :firstname, autofocus: true, class: "form-control col-4" %>

@@ -9,6 +9,8 @@ class Public::CustomersController < ApplicationController
 
   def update
     current_customer.update(customer_params)
+    redirect_to show_customers_path
+    flash[:notice] = "Your information edithing was successful."
   end
 
   def unsubclibe
