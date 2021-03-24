@@ -1,0 +1,13 @@
+<td>
+  <%= shipping_address.postcode %>
+</td>
+<td>
+  <%= shipping_address.address %>
+</td>
+<td>
+  <%= shipping_address.address_name %>
+</td>
+<td style="text-align:center">
+  <%= link_to "編集する", edit_shipping_address_path(shipping_address.id), class:"btn btn-success" %>
+  <%= link_to "削除する", shipping_address_path(shipping_address.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+</td>
