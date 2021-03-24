@@ -1,6 +1,6 @@
+<%= render 'admin/shared/error_messages', resource: @genre %>
 <div class="my-3 offset-1"><span class="page_title">ジャンル一覧・追加</span></div>
 <div class="genre-form col-10 mb-5">
-  <%= render 'admin/shared/error_messages', resource: @genre %>
   <%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
     <div class="row">
       <%= f.label :genre, "ジャンル名", class: 'mr-5' %>
