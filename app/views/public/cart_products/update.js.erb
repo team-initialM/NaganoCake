@@ -1,0 +1,5 @@
+$('#cart-subtotal-<%= @cart_product.id %>').html("<%= (subtotal(@cart_product)).to_s(:delimited) %>");
+$('#cart-total').html("<%= total(@cart_products).to_s(:delimited) %>");
+<% flash.each do |type, message| %>
+  $('#notice').html("<%= message %>");
+<% end %>

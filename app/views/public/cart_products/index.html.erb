@@ -1,67 +1,33 @@
-<div class="row justify-content-between m-3"><div><span class="page_title">ショッピングカート</span></div>
+<span class = "page_title">ショッピングカート</span>
 
-<% if @cart_products.present? %>
-  <%= link_to "カートを空にする", destroy_all_cart_products_path, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger offset-8" %>
-</div>
-<table class="table table-bordered">
-  <thead class="thead-light">
-    <tr>
-      <th style="width:40%">商品名</th>
-      <th style="width:15%">単価(税込)</th>
-      <th style="width:15%">数量</th>
-      <th style="width:15%">小計</th>
-      <th style="width:15%"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_products.each do |cart_product| %>
-    <tr>
-      <td class="align-middle">
-        <%= attachment_image_tag cart_product.product, :product_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-        <%= cart_product.product.name %>
-      </td>
-      <td class="align-middle">
-        <%= include_tax(cart_product.product.price) %>
-      </td>
-      <td class="align-middle">
-        <%= form_with model:cart_product, url: cart_product_path(cart_product), local:true do |f| %>
-          <%= f.hidden_field :product_id, value: cart_product.product_id %>
-          <%= f.select :quantity, (1..50).each{ |n| n }, placeholder: "quantity" %>
-          <%= f.submit "変更", class:"btn btn-success" %>
-        <% end %>
-      </td>
-      <td class="align-middle"><%= (subtotal(cart_product)).to_s(:delimited) %></td>
-      <td class="align-middle text-center"><%= link_to "削除する", cart_product_path(cart_product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% else %>
-</div>
-  <p class="mx-4">カート内に商品はありません。</p>
-<% end %>
-
-<div class="col-12 d-flex justify-content-between p-0">
-  <div class="col-3 m-2">
-    <%= link_to "買い物を続ける", root_path, class:"btn btn-primary" %>
-  </div>
+<div id="cart-products">
   <% if @cart_products.present? %>
-    <table class="table table-bordered col-3">
-      <thead class="thead-light">
-        <tr>
-          <th style="width:50%">
-            合計金額
-          </th>
-          <td style="width:50%">
-            <%= total(@cart_products) %>
-          </td>
-        </tr>
-      </thead>
-    </table>
+    <div id="cart-products-content">
+      <%= render 'cart-products-content', cart_products: @cart_products %>
+    </div>
+  <% else %>
+    <p>カート内に商品はありません。</p>
+  <% end %>
 </div>
 
-<div class = "row justify-content-center my-4">
-  <%= link_to "情報入力に進む", new_order_path, class:"btn btn-success" %>
+<div class = "col-12 d-flex justify-content-between p-0" id="cart-links">
+  <%= render 'keep-cart-button' %>
+<% if @cart_products.present? %>
+  <table class="table table-bordered col-3">
+    <thead class = "thead-light">
+      <tr>
+        <th style = "width:50%">
+          合計金額
+        </th>
+        <td style = "width:50%" id="cart-total">
+          <%= total(@cart_products).to_s(:delimited) %>
+        </td>
+      </tr>
+    </thead>
+  </table>
 </div>
-  <% end %>
+
+  <div class = "col-12 d-flex justify-content-center" id="cart-order-link">
+    <%= link_to "情報入力に進む", new_order_path, class:"btn btn-success" %>
+  </div>
+<% end %>

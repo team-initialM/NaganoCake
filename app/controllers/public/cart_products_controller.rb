@@ -30,28 +30,36 @@ class Public::CartProductsController < ApplicationController
 
   def update
     @cart_product = CartProduct.find(params[:id])
-    if @cart_product.update(cart_product_params)
-      redirect_to cart_products_path
-      flash[:notice] = "The quantity of selected items has changed."
+    @cart_products = CartProduct.where(customer_id: current_customer.id)
+    respond_to do |format|
+      if @cart_product.update(cart_product_params)
+        format.js { flash[:notice] = "The quantity of selected items has changed." }
+      end
     end
   end
 
   def destroy
+    @cart_products = CartProduct.where(customer_id: current_customer.id)
     @cart_product = CartProduct.find(params[:id])
-    @cart_product.destroy
-    redirect_to cart_products_path
-    flash[:notice] = "The selected item has been removed from the cart."
+    respond_to do |format|
+      if @cart_product.destroy
+        format.js { flash[:notice] = "The selected item has been removed from the cart." }
+      end
+    end
   end
 
   def destroy_all
     @cart_products = CartProduct.where(customer_id: current_customer.id)
-    @cart_products.destroy_all
-    redirect_to cart_products_path
-    flash[:notice] = "All selected items has been removed from the cart."
+    respond_to do |format|
+      if @cart_products.destroy_all
+        format.js { flash[:notice] = "All selected items has been removed from the cart." }
+      end
+    end
   end
 
   private
-    def cart_product_params
-      params.require(:cart_product).permit(:product_id, :quantity)
-    end
+
+  def cart_product_params
+    params.require(:cart_product).permit(:product_id, :quantity)
+  end
 end
