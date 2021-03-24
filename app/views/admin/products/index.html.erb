@@ -1,6 +1,6 @@
 <div class="row offset-1 justify-content-between">
-  <div class="my-4"><span class="page_title">商品一覧</span></div>
-  <div class="my-3 mr-5">
+  <div class="my-3"><span class="page_title">商品一覧</span></div>
+  <div class="mr-5">
     <%= link_to "", new_admin_product_path, class: 'fas fa-plus-circle fa-3x text-secondary' %>
   </div>
 </div>
@@ -34,4 +34,5 @@
     <% end %>
   </tbody>
 </table>
-%= paginate @products %>
+
+<%= paginate @products %>
