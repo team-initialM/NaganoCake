@@ -1,40 +1,37 @@
-<div class="col-12">
-  <div class="row justify-content-between">
-    <span class="my-5 ml-5"><span class = "page_title">商品一覧</span></span>
-    <div class="mt-5">
-      <%= link_to "", new_admin_product_path, class: 'fas fa-plus-circle fa-3x text-secondary' %>
-    </div>
+<div class="row offset-1 justify-content-between">
+  <div class="my-4"><span class="page_title">商品一覧</span></div>
+  <div class="my-3 mr-5">
+    <%= link_to "", new_admin_product_path, class: 'fas fa-plus-circle fa-3x text-secondary' %>
   </div>
-  <table class="table">
-    <thead class="table-active">
-      <tr>
-        <th style="width: 10%">商品ID</th>
-        <th style="width: 30%">商品名</th>
-        <th style="width: 10%">税抜価格</th>
-        <th style="width: 35%">ジャンル</th>
-        <th style="width: 15%">ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @products.each do |product| %>
-        <tr>
-          <td><%= product.id %></td>
-          <td>
-            <%= link_to admin_product_path(product) do %>
-              <%= product.name %>
-            <% end %>
-          </td>
-          <td><%= product.price.to_s(:delimited) %></td>
-          <td><%= product.genre.genre %></td>
-          <% if product.is_valid == true %>
-            <td class="text-success">販売中</td>
-          <% else %>
-            <td class="text-secondary">販売停止中</td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <%= paginate @products %>
 </div>
+<table class="table mx-auto col-10">
+  <thead class="thead-light">
+    <tr>
+      <th style="width: 10%">商品ID</th>
+      <th style="width: 30%">商品名</th>
+      <th style="width: 10%">税抜価格</th>
+      <th style="width: 35%">ジャンル</th>
+      <th style="width: 15%">ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td>
+        <%= link_to admin_product_path(product) do %>
+          <%= product.name %>
+        <% end %>
+      </td>
+      <td><%= product.price.to_s(:delimited) %></td>
+      <td><%= product.genre.genre %></td>
+      <% if product.is_valid == true %>
+        <td class="text-success">販売中</td>
+      <% else %>
+        <td class="text-secondary">販売停止中</td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+%= paginate @products %>

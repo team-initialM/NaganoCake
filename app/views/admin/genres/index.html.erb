@@ -1,34 +1,31 @@
-<div class="col-12">
-  <span class="my-5 page_title">ジャンル一覧・追加</span>
-  <div class="genre-form col-10 offset-1 mb-5">
-    <%= render 'admin/shared/error_messages', resource: @genre %>
-    <%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
-      <div class="row">
-        <%= f.label :genre, "ジャンル名", class: 'mr-5' %>
-        <%= f.text_field :genre, placeholder: "ジャンル名", class: 'form-control col-4 mr-5' %>
-        <%= f.submit "新規登録", class: 'btn btn-success px-4' %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="col-5 mb-5">
-    <table class="table">
-      <thead class="table-active">
+<div class="my-3 offset-1"><span class="page_title">ジャンル一覧・追加</span></div>
+<div class="genre-form col-10 mb-5">
+  <%= render 'admin/shared/error_messages', resource: @genre %>
+  <%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
+    <div class="row">
+      <%= f.label :genre, "ジャンル名", class: 'mr-5' %>
+      <%= f.text_field :genre, placeholder: "ジャンル名", class: 'form-control col-4 mr-5' %>
+      <%= f.submit "新規登録", class: 'btn btn-success px-4' %>
+    </div>
+  <% end %>
+</div>
+<div class="col-5">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 60%;" class="pl-5">ジャンル</th>
+        <th style="width: 40%;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @genres.each do |genre| %>
         <tr>
-          <th style="width: 60%;" class="pl-5">ジャンル</th>
-          <th style="width: 40%;"></th>
+          <td class="pl-3"><%= genre.genre %></td>
+          <td><%= link_to "編集する", edit_admin_genre_path(genre), class: 'btn btn-success' %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @genres.each do |genre| %>
-          <tr>
-            <td class="pl-3"><%= genre.genre %></td>
-            <td><%= link_to "編集する", edit_admin_genre_path(genre), class: 'btn btn-success' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 

@@ -1,12 +1,12 @@
-<div class="col-12">
-  <span class="my-5"><span class="page_title">注文履歴詳細</span></span>
+<div class="container">
+  <div class="my-4 offset-1"><span class="page_title">注文履歴詳細</span></div>
   <table class="mb-5 col-6">
     <tbody>
       <tr>
         <th>購入者</th>
         <td>
           <%= link_to admin_customer_path(@order.customer) do %>
-            <%= @order.customer.firstname + @order.customer.lastname %>
+            <%= @order.customer.fullname %>
           <% end %>
         </td>
       </tr>
@@ -26,19 +26,19 @@
         <th class="pt-3">注文ステータス</th>
         <td class="pt-3">
           <%= form_with model: @order, url:admin_order_path, method: :patch, local: true do |f| %>
-            <div class="d-flex">
-              <%= f.select :order_status, Order.order_statuses.keys, {}, { class: 'form-control col-5' } %>
-              <%= f.submit "更新", class: 'btn btn-success btn-sm ml-4' %>
-            </div>
+          <div class="d-flex">
+            <%= f.select :order_status, Order.order_statuses.keys, {}, { class: 'form-control col-5' } %>
+            <%= f.submit "更新", class: 'btn btn-success btn-sm ml-4' %>
+          </div>
           <% end %>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <div class="order-detail pt-5 d-flex">
-    <table class="table col-8 mr-5" style="position: relative;">
-      <thead class="table-active">
+  <div class="order-detail row justify-content-between">
+    <table class="table col-8">
+      <thead class="thead-light">
         <tr>
           <th style="width: 25%;">商品名</th>
           <th style="width: 20%;">単価（税込）</th>
@@ -67,7 +67,7 @@
         <% end %>
       </tbody>
     </table>
-    <div class="order-detail-info col-4 mt-5 pl-5" style="position: absolute; bottom: 10px; right: 0;">
+    <div class="order-detail-info col-4 align-self-end mb-4">
       <table class="col-8">
         <tbody>
           <tr>

@@ -1,5 +1,4 @@
-<span class="page_title offset-1 my-3"><%= @customer.fullname %>さんの会員情報編集</span>
-
+<div class="offset-1 my-3"><span class="page_title"><%= @customer.fullname %>さんの会員情報編集</span></div>
 <%= form_with model: @customer, url: admin_customer_path, class: "container", local: true do |f| %>
 <div class="row my-3">
   <%= f.label "会員ＩＤ", class: "col-2" %>

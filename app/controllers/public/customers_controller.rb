@@ -9,7 +9,6 @@ class Public::CustomersController < ApplicationController
 
   def update
     current_customer.update(customer_params)
-    redirect_to show_customers_path
   end
 
   def unsubclibe
