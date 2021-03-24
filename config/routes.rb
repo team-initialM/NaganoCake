@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post 'customers/sign_in' => 'public/sessions#create', as: :customer_session
     delete 'customers/sign_out' => 'public/sessions#destroy', as: :destroy_customer_session
     get 'customers/sign_up' => 'public/registrations#new', as: :new_customer_registration
-    post 'customers' => 'public/registrations#create'
+    post 'customers/sign_up' => 'public/registrations#create'
   end
 
   scope module: :public do
