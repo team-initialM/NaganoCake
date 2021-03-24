@@ -14,15 +14,14 @@ class Public::ShippingAddressesController < ApplicationController
   def create
     @shipping_address = ShippingAddress.new(shipping_address_params)
     @shipping_address.customer_id = current_customer.id
-    # respond_to do |format|
+    respond_to do |format|
       if @shipping_address.save
-        # format.html { redierct_to :shipping_addresses_path }
-        # format.json (flash[:notice] = "配送先の登録が完了しました。")
+        format.js {flash[:notice] = "配送先の登録が完了しました。"}
       else
         @shipping_addresses = ShippingAddress.where(customer_id: current_customer.id)
-        render :index
+        format.js { render 'error' }
       end
-    # end
+    end
   end
 
   def update
@@ -38,10 +37,9 @@ class Public::ShippingAddressesController < ApplicationController
   def destroy
     @shipping_address = ShippingAddress.find(params[:id])
     @shipping_address.destroy
-    # redirect_to shipping_addresses_path
-    # respond_to do |format|
-      # format.json ( flash[:notice] = "配送先の削除が完了しました。")
-    # end
+    respond_to do |format|
+      format.js {flash[:notice] = "配送先の削除が完了しました。"}
+    end
   end
 
   private

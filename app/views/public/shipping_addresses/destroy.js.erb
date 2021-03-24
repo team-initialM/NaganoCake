@@ -1,1 +1,7 @@
 $(".shipping_address-<%= @shipping_address.id %>").remove();
+
+<% flash.each do |type, message| %>
+  $('#notice').html("<%= message %>");
+<% end %>
+
+$("#error_messages").empty();

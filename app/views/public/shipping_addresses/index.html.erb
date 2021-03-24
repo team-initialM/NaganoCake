@@ -1,4 +1,4 @@
-<%= render 'customers/shared/error_messages', resource: @shipping_address %>
+<div id="error_messages"><%= render 'customers/shared/error_messages', resource: @shipping_address %></div>
 <div class="offset-1 my-4"><span class="page_title">配送先登録/一覧</span></div>
 <%= form_with model: @shipping_address, url: shipping_addresses_path, remote: true do |f| %>
   <div class="row my-3">
@@ -27,9 +27,9 @@
   </thead>
   <tbody>
     <% @shipping_addresses.each do |shipping_address| %>
-    <tr class="shipping_address-<%= shipping_address.id %>">
+    
       <%= render "public/shipping_addresses/shipping_address_list", shipping_address: shipping_address %>
-    </tr>
+
     <% end %>
   </tbody>
 </table>

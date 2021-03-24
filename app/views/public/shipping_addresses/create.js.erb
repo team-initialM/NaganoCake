@@ -1,3 +1,8 @@
 $("#shipping_address").append("<%= j(render "public/shipping_addresses/shipping_address_list", shipping_address: @shipping_address) %>");
-
 $('input[type=text]').val("");
+
+<% flash.each do |type, message| %>
+  $('#notice').html("<%= message %>");
+<% end %>
+
+$("#error_messages").empty();
