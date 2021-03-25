@@ -1,29 +1,3 @@
 <div class="my-3 offset-1"><span class="page_title">会員一覧</span></div>
-<table class="table mx-auto col-10">
-  <thead class="thead-light">
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.id %></td>
-        <td><%= link_to customer.fullname, admin_customer_path(customer),class: "text-dark" %></td>
-        <td><%= customer.email %></td>
-        <td>
-          <% if customer.is_valid == true %>
-            <div class="text-success">有効</div>
-          <% else %>
-            <div class="text-secondary">退会</div>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= paginate @customers %>
+<%= render 'admin/customers/index', customers: @customers %>
