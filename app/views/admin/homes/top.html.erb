@@ -1,23 +1,2 @@
 <div class="my-3 offset-1"><span class="page_title">注文履歴一覧</span></div>
-<table class="table mx-auto col-10">
-  <thead class="thead-light">
-    <tr>
-      <th>購入日時</th>
-      <th>購入者</th>
-      <th>注文個数</th>
-      <th>注文ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order.id) %></td>
-        <td><%= order.customer.fullname %></td>
-        <td><%= order_products_quantity(order) %></td>
-        <td><%= order.order_status %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @orders %>
+<%= render 'admin/homes/top', orders: @orders %>
